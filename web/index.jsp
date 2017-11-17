@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Добро пожаловать на наш блог!</h1>
-        <a href="newArticle">новая статья</a><br>
+        <a href="controller?command=newArticle">новая статья</a><br>
         Наши статьи:<br>
         
         <c:forEach var="article" items="${articles}" >

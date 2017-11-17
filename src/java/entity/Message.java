@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,6 +42,7 @@ public class Message implements Serializable {
     @OneToOne
     @JoinColumn(name="author")
     private User author;
+    
     @Column(name="editDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date editDate;
@@ -49,7 +51,7 @@ public class Message implements Serializable {
     @Size(min=3,max=200)
     private String text;
     
-    @Column(name="active",columnDefinition = "false")
+    @Column(name="active")
     private Boolean active;
     
     public Message() {

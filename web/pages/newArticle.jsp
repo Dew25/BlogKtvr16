@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Новая статья!</h1>
-        <form action="addArticle" method="POST">
+        <form action="controller?command=addArticle" method="POST">
             <input type="text" name="title"><br>
             <textarea name="text"></textarea><br>
             <select name="author">

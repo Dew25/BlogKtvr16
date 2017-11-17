@@ -6,6 +6,7 @@
 package session;
 
 import entity.Message;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class MessageFacade extends AbstractFacade<Message> {
 
     public MessageFacade() {
         super(Message.class);
+    }
+
+    public List<Message> findByArticle(Long id) {
+        return em.createQuery("SELECT m FROM Message m WHERE m.article.id=:id")
+                .setParameter("id", id)
+                .getResultList();
     }
     
 }
