@@ -5,9 +5,9 @@
  */
 package factory;
 
-import command.ActionCommand;
+import interfaces.ActionCommand;
 import command.EmptyCommand;
-import command.NewArticleCommand;
+import command.article.NewArticleCommand;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import route.CommandEnum;

@@ -5,14 +5,10 @@
  */
 package controller;
 
-import command.ActionCommand;
+import interfaces.ActionCommand;
 import entity.Article;
-import entity.User;
 import factory.ActionFactory;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -32,6 +28,7 @@ import session.UserFacade;
  */
 @WebServlet(name = "Controller",loadOnStartup = 1, urlPatterns = {"/controller"})
 public class Controller extends HttpServlet {
+    public static String redirectPath = null;
     @EJB
     private ArticleFacade articleFacade;
     @EJB
@@ -56,6 +53,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        String pathInfo = request.getPathInfo();
         String page = null;
         ActionFactory client = new ActionFactory();
         String commandParametr = request.getParameter("command");
@@ -67,6 +65,8 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }else{
+            int[] range = {1,10};
+            request.setAttribute("articles", articleFacade.findRange(range));
             page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("info", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath()+page);

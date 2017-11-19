@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
+package command.article;
 
-import interfaces.ActionCommand;
 import classes.AddArticle;
+import interfaces.ActionCommand;
+import controller.Controller;
+import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,9 +23,11 @@ import session.ArticleFacade;
  *
  * @author jvm
  */
-public class EmptyCommand implements ActionCommand {
+public class AddArticleCommand implements ActionCommand {
+    
     private ArticleFacade articleFacade;
-    public EmptyCommand() {
+    
+    public AddArticleCommand() {
         Context context; 
         try {
             context = new InitialContext();
@@ -36,13 +40,25 @@ public class EmptyCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String title = request.getParameter("title");
+        String text = request.getParameter("text");
         HttpSession session = request.getSession(false);
-        if(session != null){
-            String role = (String) session.getAttribute("role");
-            request.setAttribute("role", role);
+        if(session == null){
+           Controller.redirectPath="path.page.newArticle";
+           String page = ConfigurationManager.getProperty("path.page.login");
+           return page;
         }
-        request.setAttribute("articles", articleFacade.findAll());
-        String page = ConfigurationManager.getProperty("path.page.index");
+        User regUser = (User) session.getAttribute("regUser");
+        AddArticle addArticle = new AddArticle(title,text,regUser);
+        if(addArticle.recordToBase()){
+            request.setAttribute("info", "Статья успешно добавлена");
+        }else{
+            request.setAttribute("info", "Стать добавить не удалось!");
+        }
+        int[] range = {0,10};
+        request.setAttribute("articles", articleFacade.findRange(range));
+        
+        String page = ConfigurationManager.getProperty("path.page.newArticle");
         return page;
     }
     

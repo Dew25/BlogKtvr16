@@ -14,13 +14,17 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href="controller?command=login">Войти</a><br>
+        <a href="controller?command=logout">Выйти</a>
+        
         <h1>Добро пожаловать на наш блог!</h1>
-        <a href="controller?command=newArticle">новая статья</a><br>
+        <c:if test="${role == 'ADMIN'}">
+             <a href="controller?command=newArticle">новая статья</a><br>  
+        </c:if>
+        
         Наши статьи:<br>
         
         <c:forEach var="article" items="${articles}" >
-           
-           
             <div class="article">
                 <table class="tab-article">
                     <tr>

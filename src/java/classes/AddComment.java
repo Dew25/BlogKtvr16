@@ -7,6 +7,7 @@ package classes;
 
 import interfaces.BaseRecord;
 import entity.Article;
+import entity.Comment;
 import entity.User;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -16,24 +17,24 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import session.ArticleFacade;
-import session.UserFacade;
+import session.CommentFacade;
 
 /**
  *
  * @author Melnikov
  */
-public class AddArticle implements BaseRecord{
+public class AddComment implements BaseRecord{
     
     private ArticleFacade articleFacade;
-    private UserFacade userFacade;
-    private final String title;
+    private CommentFacade commendFacade;
     private final String text;
+    private final String article;
     private final User author;
     
-    public AddArticle(String title,String text,User author) {
+    public AddComment(String text,String article,User author) {
         initContext();
-        this.title=title;
         this.text=text;
+        this.article=article;
         this.author=author;
     }
     
@@ -42,23 +43,25 @@ public class AddArticle implements BaseRecord{
         try {
             context = new InitialContext();
             this.articleFacade = (ArticleFacade) context.lookup("java:module/ArticleFacade");
-            this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
+            this.commendFacade = (CommentFacade) context.lookup("java:module/CommentFacade");
+            
         } catch (NamingException ex) {
-            Logger.getLogger(AddArticle.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(AddComment.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
     @Override
     public boolean recordToBase(){
-        if(author == null || text==null || "".equals(text)
-                || title==null || "".equals(title)){
+        if(author == null || article==null || article.isEmpty()
+                || article==null || article.isEmpty()){
             return false;
         }
         
         Calendar c = new GregorianCalendar();
+        Article toArticle = articleFacade.find(new Long(this.article));
         
-        Article newArticle = new Article(title, text, author,c.getTime());
+        Comment newComment = new Comment(toArticle, author, c.getTime(), text, Boolean.TRUE);
         try {
-            articleFacade.create(newArticle);
+            commendFacade.create(newComment);
             return true;
         } catch (Exception e) {
             return false;

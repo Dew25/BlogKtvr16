@@ -16,9 +16,17 @@
         <h3>${article.title}!</h3>
         <div>${article.text}</div>
         <div>${article.author.login}</div>
-        <c:forEach var="message" items="${messages}">
-            <div>${message.text}</div>
-            <div>${message.author.login}</div>
+        <a href="controller?command=editArticle&id=${article.id}">Изменить</a> 
+        
+        <form action="controller?command=addComment" method="POST">
+            <input type="hidden" name="articleId" value="${article.id}">
+            <textarea name="comment"></textarea><br>
+            <input type="submit" value="Добавить комментарий">
+        </form>
+        <br>
+        <c:forEach var="comment" items="${comments}">
+            <div>${comment.author.login} ${comment.editDate}</div>
+            <div>${comment.text}</div>
         </c:forEach>
     </body>
 </html>

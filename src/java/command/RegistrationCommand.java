@@ -5,6 +5,7 @@
  */
 package command;
 
+import interfaces.ActionCommand;
 import javax.servlet.http.HttpServletRequest;
 import resource.ConfigurationManager;
 

@@ -22,19 +22,22 @@ import session.UserFacade;
  *
  * @author Melnikov
  */
-public class AddArticle implements BaseRecord{
+public class EditArticle implements BaseRecord {
     
     private ArticleFacade articleFacade;
     private UserFacade userFacade;
+    private final String id;
     private final String title;
     private final String text;
-    private final User author;
+    private final User regUser;
+   
     
-    public AddArticle(String title,String text,User author) {
+    public EditArticle(String id,String title,String text,User regUser) {
         initContext();
+        this.id=id;
         this.title=title;
         this.text=text;
-        this.author=author;
+        this.regUser=regUser;
     }
     
     private void initContext(){
@@ -44,21 +47,29 @@ public class AddArticle implements BaseRecord{
             this.articleFacade = (ArticleFacade) context.lookup("java:module/ArticleFacade");
             this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
         } catch (NamingException ex) {
-            Logger.getLogger(AddArticle.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(EditArticle.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
     @Override
     public boolean recordToBase(){
-        if(author == null || text==null || "".equals(text)
-                || title==null || "".equals(title)){
+        if(id == null){
             return false;
         }
-        
+        Article article = articleFacade.find(new Long(id));
+        if( article == null){
+            Logger.getLogger(EditArticle.class.getName()).log(Level.INFO, "Статья с id="+id+" не найдена");
+            return false;
+        }
+        if(!regUser.equals(article.getAuthor())){
+            Logger.getLogger(EditArticle.class.getName()).log(Level.INFO, "Редактировать статью может только автор");
+            return false;
+        }
         Calendar c = new GregorianCalendar();
-        
-        Article newArticle = new Article(title, text, author,c.getTime());
+        article.setTitle(title);
+        article.setText(text);
+        article.setEditDate(c.getTime());
         try {
-            articleFacade.create(newArticle);
+            articleFacade.edit(article);
             return true;
         } catch (Exception e) {
             return false;

@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package command.article;
+
+import classes.ImagesList;
+import interfaces.ActionCommand;
+import controller.Controller;
+import entity.Article;
+import entity.User;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import resource.ConfigurationManager;
+import session.ArticleFacade;
+import session.UserFacade;
+
+/**
+ *
+ * @author jvm
+ */
+public class NewArticleCommand implements ActionCommand {
+    
+    private UserFacade userFacade;
+    private ArticleFacade articleFacade;
+    
+    public NewArticleCommand() {
+        Context context; 
+        try {
+            context = new InitialContext();
+            this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
+            this.articleFacade = (ArticleFacade) context.lookup("java:module/ArticleFacade");
+        } catch (NamingException ex) {
+            Logger.getLogger(NewArticleCommand.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
+        }
+    }
+    
+    @Override
+    public String execute(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            Controller.redirectPath="path.page.newArticle";
+            Controller.redirectPath="path.page.newArticle";
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        User regUser = (User) session.getAttribute("regUser");
+        if(regUser != null){
+            int[] range = {0,10};
+            List<Article> articles = articleFacade.findRange(range);
+            ImagesList imagesList = new ImagesList();
+            List<String> imagesNameList = imagesList.images(request.getServletContext().getRealPath(""));
+            request.setAttribute("imagesNameList", imagesNameList);
+            request.setAttribute("articles", articles);
+            String page = ConfigurationManager.getProperty("path.page.newArticle");
+            return page;
+        }else{
+            Controller.redirectPath="path.page.newArticle";
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        
+    }
+    
+    
+}

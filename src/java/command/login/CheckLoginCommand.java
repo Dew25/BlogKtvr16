@@ -5,7 +5,8 @@
  */
 package command.login;
 
-import command.ActionCommand;
+import interfaces.ActionCommand;
+import controller.Controller;
 import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import resource.ConfigurationManager;
 import session.UserFacade;
+import util.EncriptPass;
 
 /**
  *
@@ -41,9 +43,7 @@ public class CheckLoginCommand  implements ActionCommand  {
         
         HttpSession session = request.getSession(false);
         if(session == null){
-            request.setAttribute("info", "Неправильный логин или пароль");
-            String page = ConfigurationManager.getProperty("path.page.index");
-            return page;
+            session=request.getSession(true);
         }
         User regUser = userFacade.findByLogin(login);
         if(regUser == null){
@@ -51,12 +51,23 @@ public class CheckLoginCommand  implements ActionCommand  {
             String page = ConfigurationManager.getProperty("path.page.index");
             return page;
         }
-        
+        EncriptPass encriptPass = new EncriptPass();
+        encriptPass.setEncriptPassword(password, regUser.getSalts());
+        password = encriptPass.getEncriptPassword();
         if(password.equals(regUser.getPassword())){
             session.setAttribute("regUser", regUser);
+            
+            session.setAttribute("role", "ADMIN");
             request.setAttribute("info", "Приветствую "+regUser.getLogin());
-            request.setAttribute("enterUser", "true");
-            String page = ConfigurationManager.getProperty("path.page.index");
+            String path=null;
+            if(Controller.redirectPath!=null){
+                path = Controller.redirectPath;
+                Controller.redirectPath=null;
+            }
+            if(path == null){
+                path = "path.page.index";
+            }
+            String page = ConfigurationManager.getProperty(path);
             return page;
         }  
         request.setAttribute("info", "Неправильный логин или пароль");

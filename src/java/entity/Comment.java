@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,8 +25,8 @@ import javax.validation.constraints.Size;
  * @author Melnikov
  */
 @Entity
-@Table(name="message")
-public class Message implements Serializable {
+@Table(name="comment")
+public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,9 +53,9 @@ public class Message implements Serializable {
     @Column(name="active")
     private Boolean active;
     
-    public Message() {
+    public Comment() {
     }
-    public Message(Article article, User author, Date editDate, String text, Boolean active) {
+    public Comment(Article article, User author, Date editDate, String text, Boolean active) {
         this.article = article;
         this.author = author;
         this.editDate = editDate;
@@ -132,7 +131,7 @@ public class Message implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Message other = (Message) obj;
+        final Comment other = (Comment) obj;
         if (!Objects.equals(this.text, other.text)) {
             return false;
         }
@@ -144,7 +143,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "Message{" + "id=" + id + ", article=" + article.getTitle() + ", author=" + author.getLogin() + ", editDate=" + editDate.toString() + ", text=" + text + ", active=" + active + '}';
+        return "Comment{" + "id=" + id + ", article=" + article.getTitle() + ", author=" + author.getLogin() + ", editDate=" + editDate.toString() + ", text=" + text + ", active=" + active + '}';
     }
 
    

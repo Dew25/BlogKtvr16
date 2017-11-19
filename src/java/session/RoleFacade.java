@@ -5,7 +5,8 @@
  */
 package session;
 
-import entity.Message;
+import entity.Role;
+import entity.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,10 +14,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Melnikov
+ * @author jvm
  */
 @Stateless
-public class MessageFacade extends AbstractFacade<Message> {
+public class RoleFacade extends AbstractFacade<Role> {
 
     @PersistenceContext(unitName = "BlogKtvr16PU")
     private EntityManager em;
@@ -26,14 +27,13 @@ public class MessageFacade extends AbstractFacade<Message> {
         return em;
     }
 
-    public MessageFacade() {
-        super(Message.class);
+    public RoleFacade() {
+        super(Role.class);
     }
-
-    public List<Message> findByArticle(Long id) {
-        return em.createQuery("SELECT m FROM Message m WHERE m.article.id=:id")
-                .setParameter("id", id)
+    public List<Role> findUserRoles(User regUser){
+        List<Role> roles = em.createQuery("SELECT r FROM Role r WHERE r.regUser = :regUser")
+                .setParameter("regUser", regUser)
                 .getResultList();
+        return roles;
     }
-    
 }

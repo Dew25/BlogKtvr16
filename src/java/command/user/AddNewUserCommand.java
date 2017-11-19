@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
+package command.user;
 
 import classes.RegistrationNewUser;
+import interfaces.ActionCommand;
 import javax.servlet.http.HttpServletRequest;
 import resource.ConfigurationManager;
 

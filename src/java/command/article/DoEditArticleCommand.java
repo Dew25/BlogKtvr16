@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package command;
+package command.article;
 
-import interfaces.ActionCommand;
 import classes.AddArticle;
+import classes.EditArticle;
+import interfaces.ActionCommand;
+import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,9 +23,11 @@ import session.ArticleFacade;
  *
  * @author jvm
  */
-public class EmptyCommand implements ActionCommand {
+public class DoEditArticleCommand implements ActionCommand {
+    
     private ArticleFacade articleFacade;
-    public EmptyCommand() {
+    
+    public DoEditArticleCommand() {
         Context context; 
         try {
             context = new InitialContext();
@@ -36,13 +40,20 @@ public class EmptyCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        String text = request.getParameter("text");
         HttpSession session = request.getSession(false);
-        if(session != null){
-            String role = (String) session.getAttribute("role");
-            request.setAttribute("role", role);
+        User regUser = (User) session.getAttribute("regUser");
+        EditArticle editArticle = new EditArticle(id,title,text,regUser);
+        if(editArticle.recordToBase()){
+            request.setAttribute("info", "Статья изменена");
+        }else{
+            request.setAttribute("info", "Статью изменить не удалось!");
         }
-        request.setAttribute("articles", articleFacade.findAll());
-        String page = ConfigurationManager.getProperty("path.page.index");
+        int[] range = {0,10};
+        request.setAttribute("articles", articleFacade.findRange(range));
+        String page = ConfigurationManager.getProperty("path.page.newArticle");
         return page;
     }
     

@@ -6,7 +6,8 @@
 package command;
 
 import interfaces.ActionCommand;
-import classes.AddArticle;
+import controller.Controller;
+import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,28 +22,35 @@ import session.ArticleFacade;
  *
  * @author jvm
  */
-public class EmptyCommand implements ActionCommand {
+public class UploadFileCommand implements ActionCommand {
     private ArticleFacade articleFacade;
-    public EmptyCommand() {
+    public UploadFileCommand() {
         Context context; 
         try {
             context = new InitialContext();
             this.articleFacade = (ArticleFacade) context.lookup("java:module/ArticleFacade");
             
         } catch (NamingException ex) {
-            Logger.getLogger(AddArticle.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(UploadFileCommand.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+        User regUser = null;
         if(session != null){
             String role = (String) session.getAttribute("role");
             request.setAttribute("role", role);
+            regUser = (User) session.getAttribute("regUser");
         }
-        request.setAttribute("articles", articleFacade.findAll());
-        String page = ConfigurationManager.getProperty("path.page.index");
+        if(regUser == null){
+           Controller.redirectPath="path.page.newArticle";
+           String page = ConfigurationManager.getProperty("path.page.login");
+           return page;
+        }
+        
+        String page = ConfigurationManager.getProperty("path.page.uploadFile");
         return page;
     }
     

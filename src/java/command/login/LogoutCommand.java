@@ -5,7 +5,7 @@
  */
 package command.login;
 
-import command.ActionCommand;
+import interfaces.ActionCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import resource.ConfigurationManager;
@@ -24,7 +24,7 @@ public class LogoutCommand  implements ActionCommand  {
         }
         
         request.setAttribute("info", "Вы вышли");
-        String page = ConfigurationManager.getProperty("page.index");
+        String page = ConfigurationManager.getProperty("path.page.index");
         return page;
             
     }

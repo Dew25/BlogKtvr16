@@ -5,11 +5,9 @@
  */
 package classes;
 
+import interfaces.BaseRecord;
 import command.login.CheckLoginCommand;
-import entity.Article;
 import entity.User;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -23,14 +21,14 @@ import util.EncriptPass;
  *
  * @author Melnikov
  */
-public class RegistrationNewUser {
+public class RegistrationNewUser implements BaseRecord{
     
     private ArticleFacade articleFacade;
     private UserFacade userFacade;
-    private String login;
-    private String password1;
-    private String password2;
-    private String email;
+    private final String login;
+    private final String password1;
+    private final String password2;
+    private final String email;
     
     public RegistrationNewUser(String login,String password1,String password2,String email) {
         initContext();
@@ -50,6 +48,7 @@ public class RegistrationNewUser {
             Logger.getLogger(CheckLoginCommand.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
+    @Override
     public boolean recordToBase(){
         if(login == null || "".equals(login)
                 || password1==null || "".equals(password1)
