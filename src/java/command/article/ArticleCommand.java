@@ -5,10 +5,13 @@
  */
 package command.article;
 
+import classes.RoleContains;
 import interfaces.ActionCommand;
 import command.login.CheckLoginCommand;
+import controller.Controller;
 import entity.Article;
 import entity.Comment;
+import entity.User;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +19,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import resource.ConfigurationManager;
 import session.ArticleFacade;
 import session.CommentFacade;
@@ -40,14 +44,40 @@ public class ArticleCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String articleId = request.getParameter("id");
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            session=request.getSession(true);
+            String articleId = request.getParameter("id");
+            session.setAttribute("id",articleId);
+            session.setAttribute("path","path.page.article");
+            return ConfigurationManager.getProperty("path.page.login");
+        }
+        String articleId=null;
+        String id = (String) session.getAttribute("id");
+        if(id != null){
+            articleId = id;
+        }else{
+            articleId=request.getParameter("id");
+        }
         String page = ConfigurationManager.getProperty("path.page.index");
+        
+        User regUser = (User) session.getAttribute("regUser");
+        if(regUser == null){
+            session.setAttribute("path","path.page.article");
+            return page = ConfigurationManager.getProperty("path.page.login");
+        }
+        RoleContains rc = new RoleContains();
+        
+        if(!rc.contains("USER", regUser)){
+            session.setAttribute("path","path.page.article");
+            return page = ConfigurationManager.getProperty("path.page.login");
+        }
         
         if(articleId == null){
             return page;
         }
-        Long id = new Long(articleId);
-        Article article = articleFacade.find(id);
+        
+        Article article = articleFacade.find(new Long(articleId));
         List<Comment> comments = commentFacade.findByArticle(article.getId());
         request.setAttribute("article", article);
         request.setAttribute("comments", comments);

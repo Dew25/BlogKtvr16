@@ -5,8 +5,8 @@
  */
 package command.login;
 
+import classes.RoleContains;
 import interfaces.ActionCommand;
-import controller.Controller;
 import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,14 +56,13 @@ public class CheckLoginCommand  implements ActionCommand  {
         password = encriptPass.getEncriptPassword();
         if(password.equals(regUser.getPassword())){
             session.setAttribute("regUser", regUser);
-            
-            session.setAttribute("role", "ADMIN");
+            RoleContains rc = new RoleContains();
+            String role = rc.getRole(regUser);
+            session.setAttribute("role", role);
             request.setAttribute("info", "Приветствую "+regUser.getLogin());
-            String path=null;
-            if(Controller.redirectPath!=null){
-                path = Controller.redirectPath;
-                Controller.redirectPath=null;
-            }
+            String path;
+            path = (String) session.getAttribute("path");
+            session.removeAttribute("path");
             if(path == null){
                 path = "path.page.index";
             }

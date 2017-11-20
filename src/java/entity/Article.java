@@ -38,8 +38,8 @@ public class Article implements Serializable {
     @Size(min=3,max=50)
     private String title;
     
-    @Column(name="text")
-    @Size(min=10,max=2000)
+    @Column(name="text",length = 10000)
+    @Size(min=10,max=10000)
     private String text;
     
     @JoinColumn(name="author")

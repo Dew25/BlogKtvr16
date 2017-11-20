@@ -45,7 +45,7 @@ public class UploadFileCommand implements ActionCommand {
             regUser = (User) session.getAttribute("regUser");
         }
         if(regUser == null){
-           Controller.redirectPath="path.page.newArticle";
+           session.setAttribute("path","path.page.newArticle");
            String page = ConfigurationManager.getProperty("path.page.login");
            return page;
         }

@@ -44,7 +44,8 @@ public class AddArticleCommand implements ActionCommand {
         String text = request.getParameter("text");
         HttpSession session = request.getSession(false);
         if(session == null){
-           Controller.redirectPath="path.page.newArticle";
+            session = request.getSession(true);
+            session.setAttribute("path", "path.page.newArticle");
            String page = ConfigurationManager.getProperty("path.page.login");
            return page;
         }
@@ -53,7 +54,7 @@ public class AddArticleCommand implements ActionCommand {
         if(addArticle.recordToBase()){
             request.setAttribute("info", "Статья успешно добавлена");
         }else{
-            request.setAttribute("info", "Стать добавить не удалось!");
+            request.setAttribute("info", "Статью добавить не удалось!");
         }
         int[] range = {0,10};
         request.setAttribute("articles", articleFacade.findRange(range));

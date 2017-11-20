@@ -5,11 +5,8 @@
  */
 package command.comment;
 
-import command.article.*;
-import classes.AddArticle;
 import classes.AddComment;
 import interfaces.ActionCommand;
-import controller.Controller;
 import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +47,9 @@ public class AddCommentCommand implements ActionCommand {
         
         HttpSession session = request.getSession(false);
         if(session == null){
-           Controller.redirectPath="path.page.article";
+           session = request.getSession(true);
+           session.setAttribute("path","path.page.article");
+           
            String page = ConfigurationManager.getProperty("path.page.login");
            return page;
         }

@@ -28,7 +28,7 @@ import session.UserFacade;
  */
 @WebServlet(name = "Controller",loadOnStartup = 1, urlPatterns = {"/controller"})
 public class Controller extends HttpServlet {
-    public static String redirectPath = null;
+    
     @EJB
     private ArticleFacade articleFacade;
     @EJB

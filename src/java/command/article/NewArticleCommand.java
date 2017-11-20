@@ -46,8 +46,8 @@ public class NewArticleCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if(session == null){
-            Controller.redirectPath="path.page.newArticle";
-            Controller.redirectPath="path.page.newArticle";
+            session = request.getSession(true);
+            session.setAttribute("path","path.page.newArticle");
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
@@ -62,7 +62,7 @@ public class NewArticleCommand implements ActionCommand {
             String page = ConfigurationManager.getProperty("path.page.newArticle");
             return page;
         }else{
-            Controller.redirectPath="path.page.newArticle";
+            session.setAttribute("path","path.page.newArticle");
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
