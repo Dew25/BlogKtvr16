@@ -7,6 +7,8 @@ package command;
 
 import interfaces.ActionCommand;
 import classes.AddArticle;
+import classes.RoleContains;
+import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -38,7 +40,9 @@ public class EmptyCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if(session != null){
-            String role = (String) session.getAttribute("role");
+            User regUser = (User) session.getAttribute("regUser");
+            RoleContains rc = new RoleContains();
+            String role = rc.getRole(regUser);
             request.setAttribute("role", role);
         }
         request.setAttribute("articles", articleFacade.findAll());

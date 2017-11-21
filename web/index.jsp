@@ -20,7 +20,7 @@
         <a href="controller?command=logout">Выйти</a>
         
         <h1>Добро пожаловать на наш блог!</h1>
-        <c:if test="${role == 'ADMIN'}">
+        <c:if test="${role eq 'EDITOR' || role eq 'ADMIN'}">
              <a href="controller?command=newArticle">новая статья</a><br>  
         </c:if>
         

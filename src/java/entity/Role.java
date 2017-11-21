@@ -28,15 +28,15 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    private User regUser;
+    private User user;
     private String role;
    
     
     public Role() {
     }
 
-    public Role(User regUser, String role) {
-        this.regUser = regUser;
+    public Role(User user, String role) {
+        this.user = user;
         this.role = role;
     }
 
@@ -49,11 +49,11 @@ public class Role implements Serializable {
     }
 
     public User getRegUser() {
-        return regUser;
+        return user;
     }
 
-    public void setRegUser(User regUser) {
-        this.regUser = regUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getRole() {
@@ -67,7 +67,7 @@ public class Role implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.regUser);
+        hash = 47 * hash + Objects.hashCode(this.user);
         hash = 47 * hash + Objects.hashCode(this.role);
         return hash;
     }
@@ -87,7 +87,7 @@ public class Role implements Serializable {
         if (!Objects.equals(this.role, other.role)) {
             return false;
         }
-        if (!Objects.equals(this.regUser, other.regUser)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "Role{" + "id=" + id + ", regUser.getLogin=" + regUser.getLogin() + ", role=" + role + '}';
+        return "Role{" + "id=" + id + ", user.getLogin=" + user.getLogin() + ", role=" + role + '}';
     }
     
     

@@ -5,12 +5,11 @@
  */
 package command.user;
 
+import classes.DeleteRole;
 import classes.RoleContains;
+import classes.SetRole;
 import entity.User;
 import interfaces.ActionCommand;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -52,6 +51,17 @@ public class SetRoleCommand implements ActionCommand  {
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
+        RoleContains rc = new RoleContains();
+        if(!rc.contains("ADMIN", regUser)){
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        if(selectRole != null && "delete".equals(selectRole)){
+            DeleteRole deleteRole = new DeleteRole(selectRole, selectUser);
+        }else{
+            SetRole setRole = new SetRole(selectRole, selectUser);
+        }
+        
         
         String page = ConfigurationManager.getProperty("path.page.admin");
         return page;

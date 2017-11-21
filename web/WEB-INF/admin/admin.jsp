@@ -15,22 +15,26 @@
     </head>
     <body>
         <div class="wrapper">
-            <h1>Администрирование пользователей!</h1>
-            Список пользователей:
-            <form action="controller?command=setRole" method="POST">
-                <select name="selectUser">
-                    <c:forEach var="entry" items="${mapUsers}">
-                        <option value="${entry.key.id}">${entry.key.login} role=${entry.value}</option>
-                    </c:forEach>
-                </select>
-                <select name="selectRole">
-                    <c:forEach var="role" items="${roles}">
-                        <option value="${role}">${role}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <input type="submit" value="Назначить">
-            </form>
+            <h3>Администрирование пользователей!</h3>
+            <div class="content">
+                Список пользователей:
+                <form action="controller?command=setRole" method="POST">
+                    <select name="selectUser">
+                        <c:forEach var="entry" items="${mapUsers}">
+                            <option value="${entry.key.id}">${entry.key.login} role=${entry.value}</option>
+                        </c:forEach>
+                    </select>
+                    <select name="selectRole">
+                        <option value="delete">Удалить роль</option>
+                        <c:forEach var="role" items="${roles}">
+                            <option value="${role}">${role}</option>
+                        </c:forEach>
+                    </select>
+                    <br>
+                    <input type="submit" value="Назначить">
+                </form>
+                
+            </div>    
         </div>
     </body>
 </html>
