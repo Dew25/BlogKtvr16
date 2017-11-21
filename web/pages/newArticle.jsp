@@ -21,6 +21,12 @@
                     <a href="controller?command=article&id=${article.id}">${article.title}</a>
                     <a href="controller?command=deleteArticle&id=${article.id}">x</a>
                     <a href="controller?command=editArticle&id=${article.id}">Редактировать</a>
+                    <c:if test="${article.active eq true}">
+                        Опубликовано
+                    </c:if>
+                    <c:if test="${article.active eq false}">
+                        Скрыто
+                    </c:if>
                 </li>
             </c:forEach>
         </ul>

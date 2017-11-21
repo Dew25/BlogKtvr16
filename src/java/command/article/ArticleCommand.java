@@ -5,10 +5,10 @@
  */
 package command.article;
 
-import classes.RoleContains;
+
+import classes.RoleUser;
 import interfaces.ActionCommand;
 import command.login.CheckLoginCommand;
-import controller.Controller;
 import entity.Article;
 import entity.Comment;
 import entity.User;
@@ -45,31 +45,32 @@ public class ArticleCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+        String page = ConfigurationManager.getProperty("path.page.index");
         if(session == null){
             session=request.getSession(true);
             String articleId = request.getParameter("id");
             session.setAttribute("id",articleId);
-            session.setAttribute("path","path.page.article");
-            return ConfigurationManager.getProperty("path.page.login");
+            session.setAttribute("path","path.page.index");
+            return page =ConfigurationManager.getProperty("path.page.login");
         }
-        String articleId=null;
+        String articleId;
         String id = (String) session.getAttribute("id");
         if(id != null){
             articleId = id;
         }else{
             articleId=request.getParameter("id");
         }
-        String page = ConfigurationManager.getProperty("path.page.index");
+        page = ConfigurationManager.getProperty("path.page.index");
         
         User regUser = (User) session.getAttribute("regUser");
         if(regUser == null){
-            session.setAttribute("path","path.page.article");
+            session.setAttribute("path","path.page.index");
             return page = ConfigurationManager.getProperty("path.page.login");
         }
-        RoleContains rc = new RoleContains();
+        RoleUser ru = new RoleUser();
         
-        if(!rc.contains("USER", regUser)){
-            session.setAttribute("path","path.page.article");
+        if(!ru.contains("USER", regUser)){
+            session.setAttribute("path","path.page.index");
             return page = ConfigurationManager.getProperty("path.page.login");
         }
         

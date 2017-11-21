@@ -45,6 +45,7 @@ public class AddCommentCommand implements ActionCommand {
         String comment = request.getParameter("comment");
         String articleId = request.getParameter("articleId");
         
+        
         HttpSession session = request.getSession(false);
         if(session == null){
            session = request.getSession(true);

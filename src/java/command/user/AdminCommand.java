@@ -6,7 +6,7 @@
 package command.user;
 
 import classes.AddArticle;
-import classes.RoleContains;
+import classes.RoleUser;
 import classes.RoleEnum;
 import entity.User;
 import interfaces.ActionCommand;
@@ -45,11 +45,11 @@ public class AdminCommand implements ActionCommand  {
     @Override
     public String execute(HttpServletRequest request) {
         List<User> users = userFacade.findAll();
-        RoleContains roleContains = new RoleContains();
+        RoleUser ru = new RoleUser();
         Map<User,String>mapUsers=new HashMap<>();
         
         for (User user : users) {
-            String role = roleContains.getRole(user);
+            String role = ru.getRole(user);
             mapUsers.put(user, role);
         }
         

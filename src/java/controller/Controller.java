@@ -36,7 +36,8 @@ public class Controller extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        List<Article> articles = articleFacade.findAll();
+        int[] range = {0,10};
+        List<Article> articles = articleFacade.findActiveArticleAll(range);
         getServletContext().setAttribute("articles", articles);
     }
     
@@ -65,8 +66,8 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }else{
-            int[] range = {1,10};
-            request.setAttribute("articles", articleFacade.findRange(range));
+            int[] range = {0,10};
+            request.setAttribute("articles", articleFacade.findActiveArticleAll(range));
             page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("info", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath()+page);

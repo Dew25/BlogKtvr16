@@ -43,14 +43,18 @@ public class User implements Serializable {
     @Column(name="email")
     private String email;
 
+    @Column(name="active")
+    private boolean active;
+    
     public User() {
     }
 
-    public User(String login, String password, String salts, String email) {
+    public User(String login, String password, String salts, String email, boolean active) {
         this.login = login;
         this.password = password;
         this.salts = salts;
         this.email = email;
+        this.active = active;
     }
     
     
@@ -95,6 +99,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -132,5 +144,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "id=" + id + ", login=" + login + ", password=" + password + ", salts=" + salts + ", email=" + email + '}';
     }
+
+    
 
 }

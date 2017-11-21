@@ -24,6 +24,7 @@
                     </c:forEach>
                 </select>
                 <select name="selectRole">
+                    <option value="delete">Удалить роль</option>
                     <c:forEach var="role" items="${roles}">
                         <option value="${role}">${role}</option>
                     </c:forEach>

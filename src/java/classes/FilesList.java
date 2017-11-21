@@ -14,12 +14,12 @@ import resource.FileDirectoriesManager;
  *
  * @author jvm
  */
-public class ImagesList {
+public class FilesList {
 
-    public ImagesList() {
+    public FilesList() {
     }
     
-    public List<String> images(String pathToApp){
+    public List<String> listFileNames(String pathToApp){
         List<String> imagesList = new ArrayList<>();
         File dir = new File(pathToApp+File.separator
                 +"resources"+File.separator+

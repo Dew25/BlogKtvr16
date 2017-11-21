@@ -5,9 +5,8 @@
  */
 package command.article;
 
-import classes.ImagesList;
+import classes.FilesList;
 import interfaces.ActionCommand;
-import controller.Controller;
 import entity.Article;
 import entity.User;
 import java.util.List;
@@ -55,8 +54,8 @@ public class NewArticleCommand implements ActionCommand {
         if(regUser != null){
             int[] range = {0,10};
             List<Article> articles = articleFacade.findRange(range);
-            ImagesList imagesList = new ImagesList();
-            List<String> imagesNameList = imagesList.images(request.getServletContext().getRealPath(""));
+            FilesList imagesList = new FilesList();
+            List<String> imagesNameList = imagesList.listFileNames(request.getServletContext().getRealPath(""));
             request.setAttribute("imagesNameList", imagesNameList);
             request.setAttribute("articles", articles);
             String page = ConfigurationManager.getProperty("path.page.newArticle");

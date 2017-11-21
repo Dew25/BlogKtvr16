@@ -7,7 +7,6 @@ package command.article;
 
 import classes.AddArticle;
 import interfaces.ActionCommand;
-import controller.Controller;
 import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +41,7 @@ public class AddArticleCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String title = request.getParameter("title");
         String text = request.getParameter("text");
+        
         HttpSession session = request.getSession(false);
         if(session == null){
             session = request.getSession(true);

@@ -51,11 +51,11 @@ public class Comment implements Serializable {
     private String text;
     
     @Column(name="active")
-    private Boolean active;
+    private boolean active;
     
     public Comment() {
     }
-    public Comment(Article article, User author, Date editDate, String text, Boolean active) {
+    public Comment(Article article, User author, Date editDate, String text, boolean active) {
         this.article = article;
         this.author = author;
         this.editDate = editDate;
@@ -104,11 +104,11 @@ public class Comment implements Serializable {
         this.text = text;
     }
 
-    public Boolean getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 

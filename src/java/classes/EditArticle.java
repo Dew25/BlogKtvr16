@@ -30,14 +30,16 @@ public class EditArticle implements BaseRecord {
     private final String title;
     private final String text;
     private final User regUser;
+    private final boolean active;
    
     
-    public EditArticle(String id,String title,String text,User regUser) {
+    public EditArticle(String id,String title,String text,User regUser, boolean active) {
         initContext();
         this.id=id;
         this.title=title;
         this.text=text;
         this.regUser=regUser;
+        this.active = active;
     }
     
     private void initContext(){
@@ -68,6 +70,7 @@ public class EditArticle implements BaseRecord {
         article.setTitle(title);
         article.setText(text);
         article.setEditDate(c.getTime());
+        article.setActive(active);
         try {
             articleFacade.edit(article);
             return true;

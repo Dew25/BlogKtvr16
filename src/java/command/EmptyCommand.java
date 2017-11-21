@@ -41,7 +41,8 @@ public class EmptyCommand implements ActionCommand {
             String role = (String) session.getAttribute("role");
             request.setAttribute("role", role);
         }
-        request.setAttribute("articles", articleFacade.findAll());
+        int[] range = {0,10};
+        request.setAttribute("articles", articleFacade.findActiveArticleAll(range));
         String page = ConfigurationManager.getProperty("path.page.index");
         return page;
     }

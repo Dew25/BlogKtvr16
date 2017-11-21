@@ -29,13 +29,15 @@ public class RegistrationNewUser implements BaseRecord{
     private final String password1;
     private final String password2;
     private final String email;
+    private final boolean active;
     
-    public RegistrationNewUser(String login,String password1,String password2,String email) {
+    public RegistrationNewUser(String login,String password1,String password2,String email,boolean active) {
         initContext();
         this.login=login;
         this.password1=password1;
         this.password2=password2;
         this.email=email;
+        this.active = active;
     }
     
     private void initContext(){
@@ -61,7 +63,7 @@ public class RegistrationNewUser implements BaseRecord{
         String salts = ep.getSalts();
         ep.setEncriptPassword(password1, salts);
         String encriptPassword = ep.getEncriptPassword();
-        User regUser = new User(login,encriptPassword,salts,email);
+        User regUser = new User(login,encriptPassword,salts,email,active);
         try {
             userFacade.create(regUser);
             return true;

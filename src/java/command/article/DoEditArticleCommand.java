@@ -43,9 +43,12 @@ public class DoEditArticleCommand implements ActionCommand {
         String id = request.getParameter("id");
         String title = request.getParameter("title");
         String text = request.getParameter("text");
+        String active = request.getParameter("active");
+        boolean a = active != null;
+        
         HttpSession session = request.getSession(false);
         User regUser = (User) session.getAttribute("regUser");
-        EditArticle editArticle = new EditArticle(id,title,text,regUser);
+        EditArticle editArticle = new EditArticle(id,title,text,regUser,a);
         if(editArticle.recordToBase()){
             request.setAttribute("info", "Статья изменена");
         }else{

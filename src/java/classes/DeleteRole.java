@@ -8,6 +8,7 @@ package classes;
 import entity.Role;
 import entity.User;
 import interfaces.BaseRecord;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -20,14 +21,14 @@ import session.UserFacade;
  *
  * @author jvm
  */
-public class SetRole implements BaseRecord{
+public class DeleteRole implements BaseRecord{
     
     private UserFacade userFacade;
     private RoleFacade roleFacade;
     private String role;
     private User user;
 
-    public SetRole() {
+    public DeleteRole() {
         Context context; 
         try {
             context = new InitialContext();
@@ -39,7 +40,7 @@ public class SetRole implements BaseRecord{
     }
     
     
-    public SetRole(String role, User user) {
+    public DeleteRole(String role, User user) {
         this.role=role;
         this.user=user;
         Context context; 
@@ -48,16 +49,17 @@ public class SetRole implements BaseRecord{
             this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
             this.roleFacade = (RoleFacade) context.lookup("java:module/RoleFacade");
         } catch (NamingException ex) {
-            Logger.getLogger(SetRole.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         }
     }
     
     public boolean recordToBase(String role, String userId){
-        if(role == null || role.isEmpty() || userId==null || userId.isEmpty()){
-             Logger.getLogger(SetRole.class.getName()).log(Level.INFO, "Некорректный ввод роли или пользователя");
+        if(role == null || role.isEmpty() || userId == null || userId.isEmpty()){
+            Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не корректный ввод роли или пользователя");
+            return false;
         }
         this.role=role;
-        this.user=user;
+        this.user=userFacade.find(new Long(userId));
         return recordToBase();
     }
     
@@ -69,32 +71,18 @@ public class SetRole implements BaseRecord{
     
     @Override
     public boolean recordToBase() {
-        if(role == null || role.isEmpty() || user == null){ return false;}
+        if(role == null || role.isEmpty() || user == null){ 
+            Logger.getLogger(DeleteRole.class.getName()).log(Level.SEVERE, "Не корректный ввод роли или пользователя");
+            return false;
+        }
         RoleUser ru = new RoleUser();
-        if(ru.contains(role, user)){ return false;}
-        
-        Role newRole = new Role();
-        newRole.setRegUser(user);
-        switch (role) {
-            case "ADMIN":
-                newRole.setRole("ADMIN");
-                roleFacade.create(newRole);
-                newRole.setRole("EDITOR");
-                roleFacade.create(newRole);
-                newRole.setRole("USER");
-                roleFacade.create(newRole);
-                break;
-            case "EDITOR":
-                newRole.setRole("EDITOR");
-                roleFacade.create(newRole);
-                newRole.setRole("USER");
-                roleFacade.create(newRole);
-                break;
-            case "USER":
-                newRole.setRole("USER");
-                roleFacade.create(newRole);
-                break;
-            
+        if(!ru.contains(role, user)){ 
+            Logger.getLogger(DeleteRole.class.getName()).log(Level.SEVERE, "У пользователя нет удаляемой роли");
+            return false;
+        }
+        List<Role> roles = roleFacade.findUserRoles(user);
+        for (Role deleteRole : roles) {
+            roleFacade.remove(deleteRole);
         }
         return true;
     }

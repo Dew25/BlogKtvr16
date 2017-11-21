@@ -56,11 +56,12 @@ public class AddArticle implements BaseRecord{
         
         Calendar c = new GregorianCalendar();
         
-        Article newArticle = new Article(title, text, author,c.getTime());
+        Article newArticle = new Article(title, text, author,c.getTime(), true);
         try {
             articleFacade.create(newArticle);
             return true;
         } catch (Exception e) {
+            Logger.getLogger(AddArticle.class.getName()).log(Level.INFO, "Не удалось создать статью");
             return false;
         }
     }

@@ -35,7 +35,7 @@ public class Article implements Serializable {
     private Long id;
     
     @Column(name="title")
-    @Size(min=3,max=50)
+    @Size(min=3,max=100)
     private String title;
     
     @Column(name="text",length = 10000)
@@ -49,19 +49,22 @@ public class Article implements Serializable {
     @Column(name="editDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date editDate;
-
+    
+    @Column(name="active")
+    private boolean active;
+    
     public Article() {
     }
 
-    public Article(String title, String text, User author, Date editDate) {
+    public Article(String title, String text, User author, Date editDate, boolean active) {
         this.title = title;
         this.text = text;
         this.author = author;
         this.editDate = editDate;
+        this.active = active;
     }
 
-    
-    
+
     
     public Long getId() {
         return id;
@@ -139,6 +142,14 @@ public class Article implements Serializable {
     @Override
     public String toString() {
         return "Article{" + "id=" + id + ", title=" + title + ", text=" + text + ", author=" + author.toString() + ", editDate=" + editDate.toString() + '}';
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
         
