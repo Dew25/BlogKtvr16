@@ -6,8 +6,8 @@
 package command;
 
 import interfaces.ActionCommand;
-import classes.AddArticle;
-import classes.RoleUser;
+import classes.article.AddArticle;
+import classes.user.RoleUser;
 import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;

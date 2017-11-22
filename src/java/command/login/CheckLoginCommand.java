@@ -5,7 +5,7 @@
  */
 package command.login;
 
-import classes.RoleUser;
+import classes.user.RoleUser;
 import interfaces.ActionCommand;
 import entity.User;
 import java.util.logging.Level;

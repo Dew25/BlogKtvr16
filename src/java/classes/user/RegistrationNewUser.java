@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package classes.user;
 
 import interfaces.BaseRecord;
 import command.login.CheckLoginCommand;

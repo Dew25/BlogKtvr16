@@ -5,7 +5,7 @@
  */
 package command.article;
 
-import classes.DeleteArticle;
+import classes.article.DeleteArticle;
 import interfaces.ActionCommand;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,7 +5,7 @@
  */
 package command.user;
 
-import classes.RegistrationNewUser;
+import classes.user.RegistrationNewUser;
 import interfaces.ActionCommand;
 import javax.servlet.http.HttpServletRequest;
 import resource.ConfigurationManager;

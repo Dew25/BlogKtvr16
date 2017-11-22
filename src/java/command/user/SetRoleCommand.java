@@ -5,8 +5,8 @@
  */
 package command.user;
 
-import classes.DeleteRole;
-import classes.SetRole;
+import classes.user.DeleteRole;
+import classes.user.SetRole;
 import entity.User;
 import interfaces.ActionCommand;
 import java.util.logging.Level;

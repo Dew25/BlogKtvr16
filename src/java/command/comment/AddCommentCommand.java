@@ -5,7 +5,7 @@
  */
 package command.comment;
 
-import classes.AddComment;
+import classes.comment.AddComment;
 import interfaces.ActionCommand;
 import entity.User;
 import java.util.logging.Level;

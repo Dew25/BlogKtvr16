@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package classes.comment;
 
 import interfaces.BaseRecord;
 import entity.Article;
 import entity.Comment;
-import java.util.List;
+import entity.User;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,15 +23,19 @@ import session.CommentFacade;
  *
  * @author Melnikov
  */
-public class DeleteArticle implements BaseRecord {
+public class AddComment implements BaseRecord{
     
     private ArticleFacade articleFacade;
-    private CommentFacade commentFacade;
-    private final String id;
+    private CommentFacade commendFacade;
+    private final String text;
+    private final String article;
+    private final User author;
     
-    public DeleteArticle(String id) {
+    public AddComment(String text,String article,User author) {
         initContext();
-        this.id=id;
+        this.text=text;
+        this.article=article;
+        this.author=author;
     }
     
     private void initContext(){
@@ -37,29 +43,27 @@ public class DeleteArticle implements BaseRecord {
         try {
             context = new InitialContext();
             this.articleFacade = (ArticleFacade) context.lookup("java:module/ArticleFacade");
-            this.commentFacade = (CommentFacade) context.lookup("java:module/CommentFacade");
+            this.commendFacade = (CommentFacade) context.lookup("java:module/CommentFacade");
+            
         } catch (NamingException ex) {
-            Logger.getLogger(DeleteArticle.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(AddComment.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
     @Override
     public boolean recordToBase(){
-        if(id == null | "".equals(id)){
+        if(author == null || article==null || article.isEmpty()
+                || article==null || article.isEmpty()){
             return false;
         }
-        Article deleteArticle = articleFacade.find(new Long(id));
-        List<Comment> messages = commentFacade.findByArticle(new Long(id));
+        
+        Calendar c = new GregorianCalendar();
+        Article toArticle = articleFacade.find(new Long(this.article));
+        
+        Comment newComment = new Comment(toArticle, author, c.getTime(), text, Boolean.TRUE);
         try {
-            if(messages != null){
-                for (int i = 0; i < messages.size(); i++) {
-                    Comment comment = messages.get(i);
-                    commentFacade.remove(comment);
-                }
-            }
-            articleFacade.remove(deleteArticle);
+            commendFacade.create(newComment);
             return true;
         } catch (Exception e) {
-            Logger.getLogger(DeleteArticle.class.getName()).log(Level.SEVERE, "Не удалось удалить статью или коментарий", e);
             return false;
         }
     }

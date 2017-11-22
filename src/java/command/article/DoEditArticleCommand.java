@@ -5,8 +5,8 @@
  */
 package command.article;
 
-import classes.AddArticle;
-import classes.EditArticle;
+import classes.article.AddArticle;
+import classes.article.EditArticle;
 import interfaces.ActionCommand;
 import entity.User;
 import java.util.logging.Level;
