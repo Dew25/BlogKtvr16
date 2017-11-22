@@ -45,8 +45,6 @@ public class FileUploadServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        // Укажите в переменной path путь к каталогу, где будут храниться загруженные файлы (изображения)
-        // Не забудьте дать права этой директории на запись чтение и исполнение (chmod 777)
         request.setCharacterEncoding("UTF-8");
         
         final String path = request.getServletContext().getRealPath("")+File.separator

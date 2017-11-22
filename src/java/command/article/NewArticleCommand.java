@@ -6,6 +6,7 @@
 package command.article;
 
 import classes.FilesList;
+import classes.RoleUser;
 import interfaces.ActionCommand;
 import entity.Article;
 import entity.User;
@@ -51,7 +52,8 @@ public class NewArticleCommand implements ActionCommand {
             return page;
         }
         User regUser = (User) session.getAttribute("regUser");
-        if(regUser != null){
+        RoleUser ru = new RoleUser();
+        if(regUser != null && ru.contains("EDITOR", regUser)){
             int[] range = {0,10};
             List<Article> articles = articleFacade.findRange(range);
             FilesList imagesList = new FilesList();

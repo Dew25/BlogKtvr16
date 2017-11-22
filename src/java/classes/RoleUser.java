@@ -41,9 +41,9 @@ public class RoleUser {
     
     public String getRole(User user){
         if(user == null){ return null;}
-        for(RoleEnum role : RoleEnum.values()){
-            if(this.contains(role.toString(), user)){
-               return role.toString();
+        for(RoleEnum roleEnum : RoleEnum.values()){
+            if(this.contains(roleEnum.toString(), user)){
+               return roleEnum.toString();
             }
         }
         return null;
@@ -64,6 +64,7 @@ public class RoleUser {
       
     public boolean contains() {
         List<Role> roles = roleFacade.findUserRoles(user);
+        if(roles == null){ return false;}
         for (int i = 0; i < roles.size(); i++) {
             Role get = roles.get(i);
             if (role.equals(get.getRole())) {

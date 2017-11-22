@@ -52,6 +52,7 @@ public class ArticleCommand implements ActionCommand {
             session.setAttribute("id",articleId);
             session.setAttribute("path","path.page.index");
             return page =ConfigurationManager.getProperty("path.page.login");
+
         }
         String articleId;
         String id = (String) session.getAttribute("id");
@@ -68,8 +69,9 @@ public class ArticleCommand implements ActionCommand {
             return page = ConfigurationManager.getProperty("path.page.login");
         }
         RoleUser ru = new RoleUser();
-        
+
         if(!ru.contains("USER", regUser)){
+
             session.setAttribute("path","path.page.index");
             return page = ConfigurationManager.getProperty("path.page.login");
         }

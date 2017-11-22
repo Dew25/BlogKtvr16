@@ -6,7 +6,6 @@
 package command.user;
 
 import classes.DeleteRole;
-import classes.RoleUser;
 import classes.SetRole;
 import entity.User;
 import interfaces.ActionCommand;
@@ -47,16 +46,17 @@ public class SetRoleCommand implements ActionCommand  {
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
-        
         User regUser = (User) session.getAttribute("regUser");
         if(regUser == null){
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
+
         if(selectRole == null || selectRole.isEmpty()){
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
+
         
         if("delete".equals(selectRole)){
             DeleteRole deleteRole = new DeleteRole();

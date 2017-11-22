@@ -58,6 +58,10 @@ public class CheckLoginCommand  implements ActionCommand  {
             session.setAttribute("regUser", regUser);
             RoleUser ru = new RoleUser();
             String role = ru.getRole(regUser);
+            if(role == null){
+                String page = ConfigurationManager.getProperty("path.page.index");
+                return page;
+            }
             session.setAttribute("role", role);
             request.setAttribute("info", "Приветствую "+regUser.getLogin());
             String path;

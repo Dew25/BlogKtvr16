@@ -5,9 +5,12 @@
  */
 package session;
 
+import classes.RoleUser;
 import entity.Role;
 import entity.User;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,10 +33,16 @@ public class RoleFacade extends AbstractFacade<Role> {
     public RoleFacade() {
         super(Role.class);
     }
-    public List<Role> findUserRoles(User regUser){
-        List<Role> roles = em.createQuery("SELECT r FROM Role r WHERE r.regUser = :regUser")
-                .setParameter("regUser", regUser)
+    public List<Role> findUserRoles(User user){
+        try {
+            List<Role> roles = em.createQuery("SELECT r FROM Role r WHERE r.user = :user")
+                .setParameter("user", user)
                 .getResultList();
-        return roles;
+            return roles;
+        } catch (Exception e) {
+             Logger.getLogger(RoleFacade.class.getName()).log(Level.INFO, "Не удалось найти роли у пользователя", e);
+            return null;
+        }
+        
     }
 }

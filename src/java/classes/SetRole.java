@@ -38,15 +38,17 @@ public class SetRole implements BaseRecord{
         }
     }
     
+
     
-    public SetRole(String role, User user) {
+    public SetRole(String role, String userId) {
         this.role=role;
-        this.user=user;
+        
         Context context; 
         try {
             context = new InitialContext();
             this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
             this.roleFacade = (RoleFacade) context.lookup("java:module/RoleFacade");
+            this.user=userFacade.find(new Long(userId));
         } catch (NamingException ex) {
             Logger.getLogger(SetRole.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         }
@@ -57,7 +59,7 @@ public class SetRole implements BaseRecord{
              Logger.getLogger(SetRole.class.getName()).log(Level.INFO, "Некорректный ввод роли или пользователя");
         }
         this.role=role;
-        this.user=user;
+        this.user=userFacade.find(new Long(userId));
         return recordToBase();
     }
     
@@ -74,7 +76,7 @@ public class SetRole implements BaseRecord{
         if(ru.contains(role, user)){ return false;}
         
         Role newRole = new Role();
-        newRole.setRegUser(user);
+        newRole.setUser(user);
         switch (role) {
             case "ADMIN":
                 newRole.setRole("ADMIN");

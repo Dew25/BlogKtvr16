@@ -43,11 +43,13 @@ public class DeleteRole implements BaseRecord{
     public DeleteRole(String role, User user) {
         this.role=role;
         this.user=user;
+
         Context context; 
         try {
             context = new InitialContext();
             this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
             this.roleFacade = (RoleFacade) context.lookup("java:module/RoleFacade");
+
         } catch (NamingException ex) {
             Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         }
@@ -88,4 +90,5 @@ public class DeleteRole implements BaseRecord{
     }
     
     
+
 }
