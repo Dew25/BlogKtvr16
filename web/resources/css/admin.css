@@ -1,6 +1,10 @@
 .wrapper{
-    width: 500px;
+    width: 1024px;
     margin: 0 auto;
+}
+h3{
+    width: 100%;
+    text-align: center;
 }
 .content{
     display: flex;

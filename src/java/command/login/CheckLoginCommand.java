@@ -5,7 +5,7 @@
  */
 package command.login;
 
-import classes.user.RoleUser;
+import classes.RoleUser;
 import interfaces.ActionCommand;
 import entity.User;
 import java.util.logging.Level;
@@ -47,8 +47,21 @@ public class CheckLoginCommand  implements ActionCommand  {
         }
         User regUser = userFacade.findByLogin(login);
         if(regUser == null){
+            String page;
             request.setAttribute("info", "Неправильный логин или пароль");
-            String page = ConfigurationManager.getProperty("path.page.index");
+            int countAuth = 0;
+            if(session.getAttribute("countAuth") != null){
+                countAuth=(int)session.getAttribute("countAuth");
+            }
+            countAuth++;
+            session.setAttribute("countAuth",countAuth++);
+            if(countAuth < 4){
+                page = ConfigurationManager.getProperty("path.page.login");
+            }else{
+                session.removeAttribute("countAuth");
+                page = ConfigurationManager.getProperty("path.page.index");
+            }
+            
             return page;
         }
         EncriptPass encriptPass = new EncriptPass();
@@ -74,7 +87,7 @@ public class CheckLoginCommand  implements ActionCommand  {
             return page;
         }  
         request.setAttribute("info", "Неправильный логин или пароль");
-        String page = ConfigurationManager.getProperty("path.page.index");
+        String page = ConfigurationManager.getProperty("path.page.login");
         return page;
             
     }

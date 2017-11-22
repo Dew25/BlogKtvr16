@@ -22,13 +22,15 @@
                 <form action="controller?command=setRole" method="POST">
                     <select name="selectUser">
                         <c:forEach var="entry" items="${mapUsers}">
-                            <option value="${entry.key.id}">${entry.key.login} role=${entry.value}</option>
+                            <option value="${entry.key.id}">${entry.key.login} (роль: ${entry.value}) [активен: ${entry.key.active}]</option>
                         </c:forEach>
                     </select>
                     <select name="selectRole">
-                        <option value="delete">Удалить роль</option>
+                        <option value="activeFalse">Деактивировать</option>
+                        <option value="activeTrue">Активировать</option>
+                        <option value="delete">Удаление роли</option>
                         <c:forEach var="role" items="${roles}">
-                            <option value="${role}">${role}</option>
+                            <option value="${role}">Назначить роль: ${role}</option>
                         </c:forEach>
                     </select>
                     <br>

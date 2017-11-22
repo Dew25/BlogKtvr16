@@ -29,18 +29,24 @@ public class User implements Serializable {
     @Column(name="id")
     private Long id;
     
-    @Column(name="login")
-    @Size(min=3,max=12)
+    @Column(name="login",
+            unique = true,
+            nullable = false)
+    @Size(min=3,max=50)
     private String login;
     
-    @Column(name="password")
+    @Column(name="password",
+            nullable = false)
     @Size(min=3,max=64)
     private String password;
     
-    @Column(name="salts")
+    @Column(name="salts",
+            nullable = false)
     private String salts;
     
-    @Column(name="email")
+    @Column(name="email",
+            unique = true,
+            nullable = false)
     private String email;
 
     @Column(name="active")

@@ -5,6 +5,7 @@
  */
 package classes.user;
 
+import classes.RoleUser;
 import entity.Role;
 import entity.User;
 import interfaces.BaseRecord;
@@ -74,6 +75,11 @@ public class SetRole implements BaseRecord{
         if(role == null || role.isEmpty() || user == null){ return false;}
         RoleUser ru = new RoleUser();
         if(ru.contains(role, user)){ return false;}
+        String roleDown = ru.getRole(user);
+        if(roleDown != null){
+            DeleteRole deleteRole = new DeleteRole();
+            deleteRole.recordToBase(user);
+        }
         
         Role newRole = new Role();
         newRole.setUser(user);
