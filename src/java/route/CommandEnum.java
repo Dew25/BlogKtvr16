@@ -15,10 +15,12 @@ import command.user.AddNewUserCommand;
 import command.article.ArticleCommand;
 import command.article.DeleteArticleCommand;
 import command.article.EditArticleCommand;
-import command.RegistrationCommand;
+import command.user.RegistrationCommand;
 import command.UploadFileCommand;
 import command.article.DoEditArticleCommand;
 import command.comment.AddCommentCommand;
+import command.comment.DeleteCommentCommand;
+import command.comment.EditCommentCommand;
 import command.login.CheckLoginCommand;
 import command.user.AdminCommand;
 import command.user.SetRoleCommand;
@@ -43,7 +45,9 @@ public enum CommandEnum {
     ADDCOMMENT{{ this.command = new AddCommentCommand();}},
     UPLOADFILE{{ this.command = new UploadFileCommand();}},
     ADMIN{{ this.command = new AdminCommand();}},
-    SETROLE{{ this.command = new SetRoleCommand();}}
+    SETROLE{{ this.command = new SetRoleCommand();}},
+    EDITCOMMENT{{ this.command = new EditCommentCommand();}},
+    DELETECOMMENT{{ this.command = new DeleteCommentCommand();}}
     ;
     
     ActionCommand command;

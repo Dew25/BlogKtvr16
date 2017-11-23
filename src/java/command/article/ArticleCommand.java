@@ -6,7 +6,7 @@
 package command.article;
 
 
-import classes.user.RoleUser;
+import classes.RoleUser;
 import interfaces.ActionCommand;
 import command.login.CheckLoginCommand;
 import entity.Article;
@@ -84,6 +84,7 @@ public class ArticleCommand implements ActionCommand {
         List<Comment> comments = commentFacade.findByArticle(article.getId());
         request.setAttribute("article", article);
         request.setAttribute("comments", comments);
+        request.setAttribute("regUser", regUser);
         page = ConfigurationManager.getProperty("path.page.article");
         return page;
     }

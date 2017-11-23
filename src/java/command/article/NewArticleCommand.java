@@ -6,7 +6,7 @@
 package command.article;
 
 import classes.user.FilesList;
-import classes.user.RoleUser;
+import classes.RoleUser;
 import interfaces.ActionCommand;
 import entity.Article;
 import entity.User;

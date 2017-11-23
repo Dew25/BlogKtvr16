@@ -5,10 +5,17 @@
  */
 package command.user;
 
+import classes.RoleEnum;
+import classes.RoleUser;
+import classes.user.ActiveUser;
+import classes.user.DeactiveUser;
 import classes.user.DeleteRole;
 import classes.user.SetRole;
 import entity.User;
 import interfaces.ActionCommand;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -57,15 +64,37 @@ public class SetRoleCommand implements ActionCommand  {
             return page;
         }
 
-        
+        boolean done;
+        String info;
         if("delete".equals(selectRole)){
             DeleteRole deleteRole = new DeleteRole();
-            deleteRole.recordToBase(selectRole,selectUser);
+            done = deleteRole.recordToBase(selectUser);
+        }else if("activeTrue".equals(selectRole)){
+            ActiveUser activeUser = new ActiveUser();
+            done = activeUser.recordToBase(selectUser);
+        }else if("activeFalse".equals(selectRole)){
+            DeactiveUser deactiveUser = new DeactiveUser();
+            done = deactiveUser.recordToBase(selectUser);
         }else{
             SetRole setRole = new SetRole();
-            setRole.recordToBase(selectRole,selectUser);
+            done = setRole.recordToBase(selectRole,selectUser);
+        }
+        if(done){
+            request.setAttribute("info","Операция выполнена");
+        }else{
+            request.setAttribute("info","Операция прервана");
         }
         String page = ConfigurationManager.getProperty("path.page.admin");
+        List<User> users = userFacade.findAll();
+        RoleUser ru = new RoleUser();
+        Map<User,String>mapUsers=new HashMap<>();
+        
+        for (User user : users) {
+            String role = ru.getRole(user);
+            mapUsers.put(user, role);
+        }
+        request.setAttribute("mapUsers", mapUsers);
+        request.setAttribute("roles", RoleEnum.values());
         return page;
     }
     

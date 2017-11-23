@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes.user;
+package classes;
 
 import classes.RoleEnum;
 import entity.Role;

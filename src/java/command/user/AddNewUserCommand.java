@@ -22,9 +22,8 @@ public class AddNewUserCommand implements ActionCommand  {
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2"); 
         String email = request.getParameter("email");
-        String active = request.getParameter("active");
-        boolean a = active != null;
-        RegistrationNewUser registrationNewUser = new RegistrationNewUser(login,password1,password2,email,a);
+        
+        RegistrationNewUser registrationNewUser = new RegistrationNewUser(login,password1,password2,email,true);
         if(registrationNewUser.recordToBase()){
             request.setAttribute("info", "Регистрация успешна!");
         }else{

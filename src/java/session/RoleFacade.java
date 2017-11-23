@@ -5,7 +5,7 @@
  */
 package session;
 
-import classes.user.RoleUser;
+import classes.RoleUser;
 import entity.Role;
 import entity.User;
 import java.util.List;

@@ -6,7 +6,7 @@
 package command.user;
 
 import classes.article.AddArticle;
-import classes.user.RoleUser;
+import classes.RoleUser;
 import classes.RoleEnum;
 import entity.User;
 import interfaces.ActionCommand;

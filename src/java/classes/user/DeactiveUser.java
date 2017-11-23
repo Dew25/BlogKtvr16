@@ -21,26 +21,26 @@ import session.UserFacade;
  *
  * @author jvm
  */
-public class DeleteRole implements BaseRecord{
+public class DeactiveUser implements BaseRecord{
     
     private UserFacade userFacade;
-    private RoleFacade roleFacade;
+   
  
     private User user;
 
-    public DeleteRole() {
+    public DeactiveUser() {
         Context context; 
         try {
             context = new InitialContext();
             this.userFacade = (UserFacade) context.lookup("java:module/UserFacade");
-            this.roleFacade = (RoleFacade) context.lookup("java:module/RoleFacade");
+          
         } catch (NamingException ex) {
             Logger.getLogger(SetRole.class.getName()).log(Level.SEVERE, "Не удалось найти сессионый бин", ex);
         }
     }
     
     
-    public DeleteRole(User user) {
+    public DeactiveUser(User user) {
         
         this.user=user;
 
@@ -51,13 +51,13 @@ public class DeleteRole implements BaseRecord{
             
 
         } catch (NamingException ex) {
-            Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
+            Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         }
     }
     
     public boolean recordToBase(String userId){
         if(userId == null || userId.isEmpty()){
-            Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не корректный ввод пользователя");
+            Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Не корректный ввод пользователя");
             return false;
         }
 
@@ -73,15 +73,19 @@ public class DeleteRole implements BaseRecord{
     @Override
     public boolean recordToBase() {
         if( user == null){ 
-            Logger.getLogger(DeleteRole.class.getName()).log(Level.INFO, "Не корректный ввод пользователя");
+            Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Не корректный ввод пользователя");
             return false;
         }
-        
-        List<Role> roles = roleFacade.findUserRoles(user);
-        for (Role deleteRole : roles) {
-            roleFacade.remove(deleteRole);
+        user.setActive(false);
+        try {
+            userFacade.edit(user);
+            return true;
+        } catch (Exception e) {
+           Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Неудалось изменить статус");
+           return false; 
         }
-        return true;
+        
+        
     }
     
     
