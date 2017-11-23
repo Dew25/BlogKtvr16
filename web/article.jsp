@@ -25,18 +25,36 @@
         </form>
         <br>
         <c:forEach var="comment" items="${comments}">
-            <c:if test="${comment.author.login eq regUser.login}">
-                <form action="controller?command=editComment" method="POST">
-                    <input type="hidden" name="articleId" value="${article.id}">
-                    <input type="hidden" name="commentId" value="${comment.id}">
+            <c:if test="${role eq 'ADMIN' || role eq 'EDITOR'}">
+                <c:if test="${comment.author.login eq regUser.login}">
+                    <form action="controller?command=editComment" method="POST">
+                        <input type="hidden" name="articleId" value="${article.id}">
+                        <input type="hidden" name="commentId" value="${comment.id}">
+                        <div>${comment.author.login} ${comment.editDate}</div>
+                        <textarea name="newComment">${comment.text}</textarea><br>
+                        <input type="submit" value="Изменить комментарий">
+                    </form>
+                </c:if>
+                <c:if test="${comment.author.login ne regUser.login}">
                     <div>${comment.author.login} ${comment.editDate}</div>
-                    <textarea name="newComment">${comment.text}</textarea><br>
-                    <input type="submit" value="Изменить комментарий">
-                </form>
+                    <div>${comment.text}</div>
+                </c:if>
+                    <a href="controller?command=deleteComment&commentId=${comment.id}&articleId=${article.id}">Удалить</a>
             </c:if>
-            <c:if test="${comment.author.login ne regUser.login}">
-                <div>${comment.author.login} ${comment.editDate}</div>
-                <div>${comment.text}</div>
+            <c:if test="${role ne 'ADMIN' || role eq 'EDITOR'}">
+                <c:if test="${comment.author.login eq regUser.login}">
+                    <form action="controller?command=editComment" method="POST">
+                        <input type="hidden" name="articleId" value="${article.id}">
+                        <input type="hidden" name="commentId" value="${comment.id}">
+                        <div>${comment.author.login} ${comment.editDate}</div>
+                        <textarea name="newComment">${comment.text}</textarea><br>
+                        <input type="submit" value="Изменить комментарий">
+                    </form>
+                </c:if>
+                <c:if test="${comment.author.login ne regUser.login}">
+                    <div>${comment.author.login} ${comment.editDate}</div>
+                    <div>${comment.text}</div>
+                </c:if>
             </c:if>
         </c:forEach>
     </body>
