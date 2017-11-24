@@ -45,15 +45,14 @@ public class AddCommentCommand implements ActionCommand {
         String comment = request.getParameter("comment");
         String articleId = request.getParameter("articleId");
         
-        
         HttpSession session = request.getSession(false);
         if(session == null){
            session = request.getSession(true);
            session.setAttribute("path","path.page.article");
-           
            String page = ConfigurationManager.getProperty("path.page.login");
            return page;
         }
+        
         User regUser = (User) session.getAttribute("regUser");
         AddComment addComment = new AddComment(comment,articleId,regUser);
         if(addComment.recordToBase()){

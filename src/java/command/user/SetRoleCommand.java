@@ -63,7 +63,16 @@ public class SetRoleCommand implements ActionCommand  {
             String page = ConfigurationManager.getProperty("path.page.login");
             return page;
         }
-
+        RoleUser ru = new RoleUser();
+        String regUserRole = ru.getRole(request);
+        if(regUserRole == null ){
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        if(!"ADMIN".equals(regUserRole) ){
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
         boolean done;
         String info;
         if("delete".equals(selectRole)){
@@ -84,17 +93,16 @@ public class SetRoleCommand implements ActionCommand  {
         }else{
             request.setAttribute("info","Операция прервана");
         }
-        String page = ConfigurationManager.getProperty("path.page.admin");
-        List<User> users = userFacade.findAll();
-        RoleUser ru = new RoleUser();
-        Map<User,String>mapUsers=new HashMap<>();
         
+        List<User> users = userFacade.findAll();
+        Map<User,String>mapUsers=new HashMap<>();
         for (User user : users) {
             String role = ru.getRole(user);
             mapUsers.put(user, role);
         }
         request.setAttribute("mapUsers", mapUsers);
         request.setAttribute("roles", RoleEnum.values());
+        String page = ConfigurationManager.getProperty("path.page.admin");
         return page;
     }
     

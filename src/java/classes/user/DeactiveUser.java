@@ -5,16 +5,13 @@
  */
 package classes.user;
 
-import entity.Role;
 import entity.User;
 import interfaces.BaseRecord;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import session.RoleFacade;
 import session.UserFacade;
 
 /**
@@ -39,7 +36,6 @@ public class DeactiveUser implements BaseRecord{
         }
     }
     
-    
     public DeactiveUser(User user) {
         
         this.user=user;
@@ -54,13 +50,12 @@ public class DeactiveUser implements BaseRecord{
             Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         }
     }
-    
+
     public boolean recordToBase(String userId){
         if(userId == null || userId.isEmpty()){
             Logger.getLogger(DeactiveUser.class.getName()).log(Level.INFO, "Не корректный ввод пользователя");
             return false;
         }
-
         this.user=userFacade.find(new Long(userId));
         return recordToBase();
     }

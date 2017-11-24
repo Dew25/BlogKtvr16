@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import session.RoleFacade;
 import session.UserFacade;
 
@@ -37,7 +39,13 @@ public class RoleUser {
             Logger.getLogger(RoleUser.class.getName()).log(Level.INFO, "Не удалось найти сессионый бин", ex);
         } 
     }
-    
+    public String getRole(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session == null){return null;}
+        User regUser = (User) session.getAttribute("regUser");
+        if(regUser == null ){return null;}
+        return getRole(regUser);
+    }
     public String getRole(User user){
         if(user == null){ return null;}
         for(RoleEnum roleEnum : RoleEnum.values()){

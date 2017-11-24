@@ -5,9 +5,7 @@
  */
 package command.comment;
 
-import classes.RoleUser;
 import classes.comment.DeleteComment;
-import classes.comment.EditComment;
 import interfaces.ActionCommand;
 import entity.User;
 import java.util.logging.Level;
@@ -46,8 +44,6 @@ public class DeleteCommentCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String commentId = request.getParameter("commentId");
         String articleId = request.getParameter("articleId");
-
-        
         HttpSession session = request.getSession(false);
         if(session == null){
            session = request.getSession(true);
@@ -55,6 +51,7 @@ public class DeleteCommentCommand implements ActionCommand {
            String page = ConfigurationManager.getProperty("path.page.login");
            return page;
         }
+        
         User regUser = (User) session.getAttribute("regUser");
         DeleteComment deleteComment = new DeleteComment();
         if(deleteComment.recordToBase(commentId,articleId)){

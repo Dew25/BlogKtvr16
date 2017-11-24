@@ -44,13 +44,24 @@ public class AdminCommand implements ActionCommand  {
 
     @Override
     public String execute(HttpServletRequest request) {
-        List<User> users = userFacade.findAll();
-        RoleUser ru = new RoleUser();
-        Map<User,String>mapUsers=new HashMap<>();
         
+        RoleUser ru = new RoleUser();
+        String role = ru.getRole(request);
+        if(role == null){
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        if(!"ADMIN".equals(role)){
+            String page = ConfigurationManager.getProperty("path.page.login");
+            return page;
+        }
+        List<User> users = userFacade.findAll();
+        
+        Map<User,String>mapUsers=new HashMap<>();
+        String userRole;
         for (User user : users) {
-            String role = ru.getRole(user);
-            mapUsers.put(user, role);
+            userRole = ru.getRole(user);
+            mapUsers.put(user, userRole);
         }
         
         request.setAttribute("mapUsers", mapUsers);
