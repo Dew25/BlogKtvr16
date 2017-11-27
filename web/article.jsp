@@ -11,6 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Статья</title>
+        <link rel="stylesheet" href="resources/css/article.css"/>
+        <script src="resources/js/article.js" defer></script>
     </head>
     <body>
         <h3>${article.title}!</h3>
@@ -27,7 +29,7 @@
         <c:forEach var="comment" items="${comments}">
             <c:if test="${role eq 'ADMIN' || role eq 'EDITOR'}">
                 <c:if test="${comment.author.login eq regUser.login}">
-                    <form action="controller?command=editComment" method="POST">
+                    <form action="controller?command=editComment" method="POST" id="form${comment.id}">
                         <input type="hidden" name="articleId" value="${article.id}">
                         <input type="hidden" name="commentId" value="${comment.id}">
                         <div>${comment.author.login} ${comment.editDate}</div>
@@ -39,9 +41,11 @@
                     <div>${comment.author.login} ${comment.editDate}</div>
                     <div>${comment.text}</div>
                 </c:if>
+                    <input class="activeEdit" id="${comment.id}" type="button" value="Редактировать" onclick="onEdit(${comment.id})">
                     <a href="controller?command=deleteComment&commentId=${comment.id}&articleId=${article.id}">Удалить</a>
+                    
             </c:if>
-            <c:if test="${role ne 'ADMIN' || role eq 'EDITOR'}">
+            <c:if test="${role ne 'ADMIN' && role ne 'EDITOR'}">
                 <c:if test="${comment.author.login eq regUser.login}">
                     <form action="controller?command=editComment" method="POST">
                         <input type="hidden" name="articleId" value="${article.id}">

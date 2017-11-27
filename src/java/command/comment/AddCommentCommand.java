@@ -42,7 +42,7 @@ public class AddCommentCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String comment = request.getParameter("comment");
+        String text = request.getParameter("comment");
         String articleId = request.getParameter("articleId");
         
         HttpSession session = request.getSession(false);
@@ -54,7 +54,7 @@ public class AddCommentCommand implements ActionCommand {
         }
         
         User regUser = (User) session.getAttribute("regUser");
-        AddComment addComment = new AddComment(comment,articleId,regUser);
+        AddComment addComment = new AddComment(text,articleId,regUser);
         if(addComment.recordToBase()){
             request.setAttribute("info", "Комментарий успешно добавлен");
         }else{

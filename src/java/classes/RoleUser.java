@@ -62,7 +62,7 @@ public class RoleUser {
         try {
             user = userFacade.find(new Long(userId));
             return getRole(user);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             Logger.getLogger(RoleUser.class.getName()).log(Level.INFO, "Не удалось найти роль", e);
             return null;
         }

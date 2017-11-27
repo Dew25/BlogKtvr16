@@ -54,7 +54,7 @@ public class DeleteCommentCommand implements ActionCommand {
         
         User regUser = (User) session.getAttribute("regUser");
         DeleteComment deleteComment = new DeleteComment();
-        if(deleteComment.recordToBase(commentId,articleId)){
+        if(deleteComment.recordToBase(articleId,commentId)){
             request.setAttribute("info", "Комментарий удален");
         }else{
             request.setAttribute("info", "Комментарий удалить не удалось!");
