@@ -56,7 +56,7 @@ public class EditCommentCommand implements ActionCommand {
         }
         User regUser = (User) session.getAttribute("regUser");
         EditComment editComment = new EditComment();
-        if(editComment.recordToBase(commentId,articleId,newComment,regUser)){
+        if(editComment.recordToBase(articleId,commentId,newComment,regUser)){
             request.setAttribute("info", "Комментарий успешно изменен");
         }else{
             request.setAttribute("info", "Комментарий изменить не удалось!");

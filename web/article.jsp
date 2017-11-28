@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Статья</title>
         <link rel="stylesheet" href="resources/css/article.css"/>
-        <script src="resources/js/article.js" defer></script>
+        
     </head>
     <body>
         <h3>${article.title}!</h3>
@@ -33,15 +33,15 @@
                         <input type="hidden" name="articleId" value="${article.id}">
                         <input type="hidden" name="commentId" value="${comment.id}">
                         <div>${comment.author.login} ${comment.editDate}</div>
-                        <textarea name="newComment">${comment.text}</textarea><br>
-                        <input type="submit" value="Изменить комментарий">
+                        <textarea disabled name="newComment" class="comment-text" id="comment${comment.id}">${comment.text}</textarea><br>
+                        <input id="changeBtn${comment.id}"  onclick="openForEditBtn(${comment.id})" type="submit"   class="comment-btn" value="Открыть для изменения">
                     </form>
                 </c:if>
                 <c:if test="${comment.author.login ne regUser.login}">
                     <div>${comment.author.login} ${comment.editDate}</div>
                     <div>${comment.text}</div>
                 </c:if>
-                    <input class="activeEdit" id="${comment.id}" type="button" value="Редактировать" onclick="onEdit(${comment.id})">
+                    <input id="editBtn${comment.id}"  type="button" value="Редактирование..." onclick="changeCommentBtn(${comment.id})">
                     <a href="controller?command=deleteComment&commentId=${comment.id}&articleId=${article.id}">Удалить</a>
                     
             </c:if>
@@ -61,5 +61,6 @@
                 </c:if>
             </c:if>
         </c:forEach>
+                    <script src="resources/js/article.js"  defer></script>
     </body>
 </html>

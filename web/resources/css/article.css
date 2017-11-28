@@ -1,6 +1,8 @@
-.formEnabledOn{
-    
+.comment-text:disabled{
+    background: white;
+    color: black;
 }
-.formEnabledOff{
-   
+.comment-btn:disabled{
+    background: white;
 }
+
