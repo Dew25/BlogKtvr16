@@ -5,7 +5,7 @@
  */
 package command.article;
 
-import classes.user.FilesList;
+import classes.FilesList;
 import classes.RoleUser;
 import interfaces.ActionCommand;
 import entity.Article;

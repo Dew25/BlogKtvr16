@@ -46,8 +46,12 @@
                         <li>${imageName}</li>
                     </c:forEach>
                 </ul>
-                
+                <div class="content-right">
+                    <a href="http://radikal.ru/" target="blank">Загрузить изображение для статьи</a><br>
+                    
+                </div>
             </div>
+            
         
         </div>
     </body>
