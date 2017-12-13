@@ -33,7 +33,7 @@
             <input type="hidden" name="id" value="${editArticle.id}">
             <input type="text" name="title" value="${editArticle.title}"><br>
             <textarea name="text">${editArticle.text}</textarea><br>
-            <c:if test="${editArticle.active eq true}">
+            <c:if test="${editArticle.active eq true && (role eq 'EDITOR' || role eq 'ADMIN')}">
                 <input type="checkbox" checked name="active"> Опубликовано
             </c:if>
             <c:if test="${editArticle.active eq false}">

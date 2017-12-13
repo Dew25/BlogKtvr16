@@ -5,6 +5,7 @@
  */
 package command.article;
 
+import classes.RoleUser;
 import classes.article.AddArticle;
 import interfaces.ActionCommand;
 import entity.Article;
@@ -45,6 +46,14 @@ public class EditArticleCommand implements ActionCommand {
             return page;
         }
         try {
+            RoleUser ru = new RoleUser();
+            String role = ru.getRole(request);
+            if("USER".equals(role) || role == null){
+                request.setAttribute("info", "У текущего пользователя нет прав на этот ресурс");
+                request.getSession().setAttribute("path", "path.page.editArticle");
+                String page = ConfigurationManager.getProperty("path.page.login");
+                return page;
+            }
             Article editArticle = articleFacade.find(new Long(id));
             int[] range = {0,10};
             request.setAttribute("articles", articleFacade.findRange(range));

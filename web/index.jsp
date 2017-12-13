@@ -16,11 +16,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="controller?command=login">Войти</a><br>
-        <a href="controller?command=logout">Выйти</a>
+        <a id="login-link" href="controller?command=login">Войти</a><br>
+        <a id="logout-link" href="controller?command=logout">Выйти</a>
         
         <h1>Добро пожаловать на наш блог!</h1>
-        <c:if test="${role eq 'EDITOR' || role eq 'ADMIN'}">
+        <c:if test="${role ne null}">
              <a href="controller?command=newArticle">новая статья</a><br>  
         </c:if>
         
@@ -33,12 +33,11 @@
                         <td class="tab-article-date">${article.editDate}</td>
                         <td class="tab-article-title">
                             <c:if test="${role ne null}">
-                                <a href="controller?command=article&id=${article.id}">${article.title}</a>
+                                <a id="addarticle-link" href="controller?command=article&id=${article.id}">${article.title}</a>
                             </c:if>
                             <c:if test="${role eq null}">
                                 ${article.title}
                             </c:if>
-                            
                         </td>
                     </tr>
                     <tr>

@@ -41,7 +41,6 @@ public class CharsetEncoding implements Filter {
         code = filterConfig.getInitParameter("encoding");
     }
     
-    
     /**
      *
      * @param request The servlet request we are processing

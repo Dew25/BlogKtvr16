@@ -17,10 +17,10 @@
         <div>${info}</div>
         <div>${error}</div>
         <form action="controller?command=checkLogin" method="POST" name="loginForm">
-            Логин: <input type="text" name="login" ><br>
-            Пароль: <input type="password" name="password"><br>
-            <input type="submit" value="Вход"><br>
-            <a href="controller?command=registration">Зарегистрироваться</a>
+            Логин: <input type="text" name="login" id="input-login" ><br>
+            Пароль: <input type="password" name="password" id="input-password"><br>
+            <input type="submit" id="input-submit" value="Вход"><br>
+            <a href="controller?command=registration" id="registration-link">Зарегистрироваться</a>
         </form>
     </body>
 </html>
