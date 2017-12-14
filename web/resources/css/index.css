@@ -12,9 +12,48 @@
     color: white;
     align-items: center;
     text-decoration: none;
-        
+}
+.wrapper{
+    width:100%;
+    text-align: center;
+}
+.title-top{
+    text-align: left;
+    
 }
 .article{
-    width:500px;
+    margin: 15px auto;
+    width: 70%;
+    box-shadow: 2px 3px 5px 3px rgba(0,0,0,0.3);
+    
+}
+.article-tab{
+    width:100%;
+}
+
+.article-tab-td-date{
+    text-align: left;
+    padding: 5px;
+    width: 80px;
+    background: #f1f4f8;
+}
+.article-tab-td-title{
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    background: #f1f4f8;
+}
+.article-tab-td-text{
+    text-align: justify;
+    padding: 5px;
+}
+.article-tab-td-text img{
+    box-shadow: 3px 3px 5px 5px rgba(23,52,55,0.3);
+    margin: 5px;
+}
+.article-tab-td-author{
+    text-align: right;
+    padding: 5px;
+    background: #f1f4f8;
 }
 

@@ -12,9 +12,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--        <link rel="stylesheet" href="resources/css/reset.css"/>-->
+        <link rel="stylesheet" href="resources/css/reset.css"/>
         <link rel="stylesheet"
- href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.teal-amber.min.css"> 
+ href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.teal-blue.min.css"> 
 <link rel="stylesheet"
  href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -36,41 +36,39 @@
             <c:if test="${role eq null}">
                 <a id="login-link" href="controller?command=login">Войти</a>
             </c:if>
-            
-            
-            
         </div>
-        
-        <h1>Добро пожаловать на наш блог!</h1>
-        
+        <div class="wrapper">
+            <h1>Добро пожаловать на наш блог!</h1>
 
-        
-        Наши статьи:<br>
-        
-        <c:forEach var="article" items="${articles}" >
-            <div class="article">
-                <table class="tab-article">
-                    <tr>
-                        <td class="tab-article-date">${article.editDate}</td>
-                        <td class="tab-article-title">
-                            <c:if test="${role ne null}">
-                                <a id="addarticle-link" href="controller?command=article&id=${article.id}">${article.title}</a>
-                            </c:if>
-                            <c:if test="${role eq null}">
-                                ${article.title}
-                            </c:if>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tab-article-text" colspan="2">${fn:substring(article.text,0,300)} ... <a href="controller?command=article&id=${article.id}">читать дальше</a></td>
-                    </tr>
-                    <tr>
-                        <td class="tab-article-author"  colspan="2">Автор: ${article.author.login}</td>
-                    </tr>                       
-                </table>
-            </div>
-        </c:forEach>
-        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js">
-</script>
+
+
+            <h4>Наши статьи:</h4>
+
+            <c:forEach var="article" items="${articles}" varStatus="status">
+                
+                <div class="article">
+                    <table class="article-tab">
+                        <tr class="article-tab-first-row">
+                            <td class="article-tab-td-date"><fmt:formatDate value="${article.editDate}" pattern="dd.MM.yyyy"/></td>
+                            <td class="article-tab-td-title">
+                                <c:if test="${role ne null}">
+                                    <a id="addarticle-link" href="controller?command=article&id=${article.id}">${article.title}</a>
+                                </c:if>
+                                <c:if test="${role eq null}">
+                                    ${article.title}
+                                </c:if>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="article-tab-td-text" colspan="2">${fn:substring(article.text,0,300)} ... <a href="controller?command=article&id=${article.id}">читать дальше</a></td>
+                        </tr>
+                        <tr>
+                            <td class="article-tab-td-author"  colspan="2">Автор: ${article.author.login}</td>
+                        </tr>                       
+                    </table>
+                </div>
+            </c:forEach>
+        </div>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
     </body>
 </html>
