@@ -31,8 +31,10 @@
         <h3>Редактирование статьи</h3>
         <form action="controller?command=doEditArticle" method="POST">
             <input type="hidden" name="id" value="${editArticle.id}">
-            <input type="text" name="title" value="${editArticle.title}"><br>
-            <textarea name="text">${editArticle.text}</textarea><br>
+            <input type="text" name="title" value="${editArticle.title}">
+            <br>
+            <textarea name="text">${editArticle.text}</textarea>
+            <br>
             <c:if test="${editArticle.active eq true && (role eq 'EDITOR' || role eq 'ADMIN')}">
                 <input type="checkbox" checked name="active"> Опубликовано
             </c:if>
@@ -40,7 +42,7 @@
                 <input type="checkbox"  name="active"> Скрыто
             </c:if>
             <br>
-            <input type="submit" value="Изменить">
+            <input type="submit" value="Изменить" />
         </form>
     </body>
 </html>

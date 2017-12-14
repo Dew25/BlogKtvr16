@@ -5,7 +5,6 @@
  */
 package classes;
 
-import classes.RoleEnum;
 import entity.Role;
 import entity.User;
 import java.util.List;

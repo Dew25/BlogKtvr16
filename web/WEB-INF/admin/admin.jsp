@@ -17,8 +17,9 @@
         <div class="wrapper">
 
             <h3>Администрирование пользователей!</h3>
+           
             <div class="content">
-                Список пользователей:
+                
                 <form action="controller?command=setRole" method="POST">
                     <select name="selectUser">
                         <c:forEach var="entry" items="${mapUsers}">
@@ -33,7 +34,7 @@
                             <option value="${role}">Назначить роль: ${role}</option>
                         </c:forEach>
                     </select>
-                    <br>
+                    <br><br>
                     <input type="submit" value="Назначить">
                 </form>
                 

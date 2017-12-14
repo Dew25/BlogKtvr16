@@ -5,16 +5,13 @@
  */
 package classes.user;
 
-import entity.Role;
 import entity.User;
 import interfaces.BaseRecord;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import session.RoleFacade;
 import session.UserFacade;
 
 /**

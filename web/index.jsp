@@ -12,17 +12,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--        <link rel="stylesheet" href="resources/css/reset.css"/>-->
+        <link rel="stylesheet"
+ href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.teal-amber.min.css"> 
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="resources/css/index.css"/>
+        
         <title>JSP Page</title>
     </head>
     <body>
-        <a id="login-link" href="controller?command=login">Войти</a><br>
-        <a id="logout-link" href="controller?command=logout">Выйти</a>
+
+        <div class="top-menu">
+            <a href="/BlogKtvr16">Главная</a>
+            <c:if test="${role eq 'EDITOR' || role eq 'ADMIN'}">
+                <a href="controller?command=newArticle">Новая статья</a>  
+            </c:if>
+            <c:if test="${role ne null}">
+                <a id="logout-link" href="controller?command=logout">Выйти</a>
+            </c:if>
+            <c:if test="${role eq null}">
+                <a id="login-link" href="controller?command=login">Войти</a>
+            </c:if>
+            
+            
+            
+        </div>
         
         <h1>Добро пожаловать на наш блог!</h1>
-        <c:if test="${role ne null}">
-             <a href="controller?command=newArticle">новая статья</a><br>  
-        </c:if>
+        
+
         
         Наши статьи:<br>
         
@@ -49,6 +70,7 @@
                 </table>
             </div>
         </c:forEach>
-        <f
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js">
+</script>
     </body>
 </html>

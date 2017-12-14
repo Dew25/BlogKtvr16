@@ -40,9 +40,8 @@ public class EmptyCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if(session != null){
-            User regUser = (User) session.getAttribute("regUser");
             RoleUser ru = new RoleUser();
-            String role = ru.getRole(regUser);
+            String role = ru.getRole(request);
             request.setAttribute("role", role);
         }
         int[] range = {0,10};

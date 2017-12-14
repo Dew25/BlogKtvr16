@@ -35,7 +35,7 @@ public class Article implements Serializable {
     private Long id;
     
     @Column(name="title")
-    @Size(min=3,max=100)
+    @Size(min=3,max=1000)
     private String title;
     
     @Column(name="text",length = 10000)
