@@ -85,6 +85,7 @@ public class ArticleCommand implements ActionCommand {
         request.setAttribute("article", article);
         request.setAttribute("comments", comments);
         request.setAttribute("regUser", regUser);
+        request.setAttribute("role", ru.getRole(regUser));
         page = ConfigurationManager.getProperty("path.page.article");
         return page;
     }

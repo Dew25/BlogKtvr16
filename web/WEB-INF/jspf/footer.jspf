@@ -1,0 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
+    </div>
+    <div class="footer">
+            <div class="footer-left">Страница разработана как учебное пособие для учеников изучающих программирование на Java</div>
+            <div class="footer-center">&#169; JIVKHK </div>
+            <div class="footer-right">IDA-VIRUMAA KUTSEHARIDUSKESKUS<br>Преподаватель JIVKHK: Jüri Melnikov</div>
+    </div>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+    <script src="resources/js/article.js" ></script>
+</body>
+</html>

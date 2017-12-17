@@ -101,7 +101,7 @@ public class Comment implements Serializable {
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.text = text.trim();
     }
 
     public boolean getActive() {

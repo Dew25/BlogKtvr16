@@ -8,7 +8,6 @@ package command;
 import interfaces.ActionCommand;
 import classes.article.AddArticle;
 import classes.RoleUser;
-import entity.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;

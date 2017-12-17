@@ -53,6 +53,7 @@ public class LogoutCommand  implements ActionCommand  {
         int[] range={0,10};
         List<Article> articles = articleFacade.findActiveArticleAll(range);
         request.setAttribute("info", "Вы вышли");
+        request.removeAttribute("role");
         request.setAttribute("articles", articles);
         String page = ConfigurationManager.getProperty("path.page.index");
         return page;

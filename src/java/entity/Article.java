@@ -34,19 +34,19 @@ public class Article implements Serializable {
     @Column(name="id")
     private Long id;
     
-    @Column(name="title")
-    @Size(min=3,max=1000)
+    @Column(name="title",length = 2000)
+    @Size(min=3,max=2000)
     private String title;
     
     @Column(name="text",length = 10000)
     @Size(min=10,max=10000)
     private String text;
     
-    @JoinColumn(name="author")
+    @JoinColumn(name="author",nullable = false)
     @OneToOne
     private User author;
     
-    @Column(name="editDate")
+    @Column(name="editDate",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date editDate;
     
@@ -141,7 +141,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", title=" + title + ", text=" + text + ", author=" + author.toString() + ", editDate=" + editDate.toString() + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", text=" + text + ", author=" + author.getLogin() + ", editDate=" + editDate.toString() + '}';
     }
 
     public boolean getActive() {

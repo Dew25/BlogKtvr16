@@ -1,20 +1,47 @@
-<%-- 
-    Document   : NewArticle
-    Created on : Nov 15, 2017, 1:14:45 PM
-    Author     : Melnikov
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="resources/css/newArticle.css"/>
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h2>Список статей:</h2>        
+        
+        <h4>Добавить новую статью</h4>
+        <div class="content">
+            <div class="content-left">
+                <form action="controller?command=addArticle" method="POST">
+                    <div class="article-caption">
+                        <div class="title-caption">
+                            
+                        </div>
+                        <div class="article-title">
+                            Заголовок статьи (не более 200 символов)<br>
+                            <input type="text" name="title">
+                        </div>
+                    </div>
+                    <div class="article-text">
+                        <div class="text-caption">
+                            
+                        </div>
+                        <div class="article-text-text">
+                            Текст статьи (не более 20000 символов)<br>
+                           <textarea name="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="article-submit">
+                        <input type="submit" value="Добавить">
+                    </div>
+                </form>
+            </div>
+            <div class="content-right">
+                <a href="controller?command=uploadFile">Загрузить файл на сервер</a><br>
+                <ul>
+                    <c:forEach var="imageName" items="${imagesNameList}">
+                        <li>${imageName}</li>
+                    </c:forEach>
+                </ul>
+                <div class="content-right">
+                    <a href="http://radikal.ru/" target="blank">Загрузить изображение для статьи (radikal.ru)</a><br>
+                    <br>
+                    <a href="http://da.am/" target="blank">Загрузить изображение для статьи (da.am)</a><br>
+                </div>
+            </div>
+        </div>
+        <h4>Список статей:</h4>        
         <ul>
             <c:forEach var="article" items="${articles}">
                 <li>  
@@ -30,29 +57,4 @@
                 </li>
             </c:forEach>
         </ul>
-        <h3>Новая статья!</h3>
-        <div class="content">
-            <div class="content-left">
-                <form action="controller?command=addArticle" method="POST">
-                    <input type="text" name="title"><br>
-                    <textarea name="text"></textarea><br>
-                    <input type="submit" value="Добавить">
-                </form>
-            </div>
-            <div class="content-right">
-                <a href="controller?command=uploadFile">Загрузить новый файл</a><br>
-                <ul>
-                    <c:forEach var="imageName" items="${imagesNameList}">
-                        <li>${imageName}</li>
-                    </c:forEach>
-                </ul>
-                <div class="content-right">
-                    <a href="http://radikal.ru/" target="blank">Загрузить изображение для статьи</a><br>
-                    
-                </div>
-            </div>
-            
-        
-        </div>
-    </body>
-</html>
+
