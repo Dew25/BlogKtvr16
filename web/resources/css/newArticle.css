@@ -1,41 +1,51 @@
-.content{
-    display: flex;
-    justify-content: space-between;
+.content {
+  display: flex;
+  justify-content: space-between;
 }
-.content-left{
-    width: 60%;
-    padding: 10px;
-    border: 2px solid #000000;
-    text-align: left;
-    
+.content-left {
+  width: 60%;
+  padding: 10px;
+  border: 2px solid #000000;
+  text-align: left;
 }
-.content-right{
-    width: 40%;
-    border: 3px solid #000000;
+.content-right {
+  width: 40%;
+  border: 3px solid #000000;
 }
-.article-title{
-    
+.article-title input {
+  width: 100%;
 }
-.article-title input{
-    width: 100%;
+.article-title {
+  width: 100%;
 }
-.title-caption{
-    
+.article-text {
+  width: 100%;
 }
-.article-title{
-    width: 100%;
+.article-text textarea {
+  width: 100%;
+  height: 80px;
 }
-.text-caption{
-    
+.article-submit {
+  padding: 10px;
 }
-.article-text{
-    width: 100%;
+.table-articles {
+  width: 90%;
+  margin: 10px auto;
+  text-align: left;
 }
-.article-text textarea{
-    width: 100%;
-    height: 80px;
+.table-articles a {
+  color: #F2E1C2;
 }
-.article-submit{
-    padding: 10px;
+.table-articles-td-title {
+  width: 250px;
 }
-
+.table-articles-td-delete {
+  width: 20px;
+}
+.table-articles-td-edit {
+  width: 80px;
+}
+.table-articles-td-active {
+  width: 50px;
+}
+/*# sourceMappingURL=newArticle.css.map */

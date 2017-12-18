@@ -1,130 +1,112 @@
-body{
-    background: #730D0D;
-    color: #F2E1C2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /*align-content: stretch;*/
+body {
+  background: #730D0D;
+  color: #F2E1C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*align-content: stretch;*/
 }
-.top-menu{
-    width: 100%;
-    height: 45px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: #091140;
+.top-menu {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #091140;
 }
-
-.top-menu>a{
-    margin-right: 10px;
-    color: #F2E1C2;
-    text-decoration: none;
+.top-menu > a {
+  margin-right: 10px;
+  color: #F2E1C2;
+  text-decoration: none;
 }
-
-.wrapper{
-    width:100%;
-    text-align: center;
+.wrapper {
+  width: 100%;
+  text-align: center;
 }
-
-.title-top{
-    text-align: left;
+.title-top {
+  text-align: left;
 }
-
-.article{
-    margin: 35px auto;
-    width: 83%;
-    box-shadow: 3px 3px 5px 2px #091140;
-    background: #F2E1C2;
-    color: #091140; 
-    font-size: 1,5em;
+.article {
+  margin: 35px auto;
+  width: 83%;
+  box-shadow: 3px 3px 5px 2px #091140;
+  background: #F2E1C2;
+  color: #091140;
+  font-size: 1,5em;
 }
-.article-title-row{
-    
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    /*width: 100%;*/
-    color: #F2E1C2;
-    background: #3947A0;
+.article-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*width: 100%;*/
+  color: #F2E1C2;
+  background: #3c4473;
 }
-
-.article-title-author{
-    /*border: 1px solid #F2E1C2;*/
-    text-align: left;
-    padding: 5px 20px;
-    /*background: #3947A0;*/
-    width: 250px;
-    
-    
+.article-title-author {
+  /*border: 1px solid #F2E1C2;*/
+  text-align: left;
+  padding: 5px 20px;
+  /*background: #3947A0;*/
+  width: 250px;
 }
-.article-title-author,.article-title-date span{
-    font-weight: bold;
+.article-title-author,
+.article-title-date span {
+  font-weight: bold;
 }
-.article-title-caption{
-    /*border: 1px solid #F2E1C2;*/
-    text-align: left;
-    width: 100%;
-    padding: 5px;
-/*    background: #091140;*/
-    
+.article-title-caption {
+  /*border: 1px solid #F2E1C2;*/
+  text-align: left;
+  width: 100%;
+  padding: 5px;
+  /*    background: #091140;*/
 }
-.article-title-caption a{
-    color: #F2E1C2;
+.article-title-caption a {
+  color: #F2E1C2;
 }
-.article-title-date{
-    /*border: 1px solid #F2E1C2;*/
-    text-align: center;
-    padding: 5px 25px;
-/*    width: 80px;*/
-    
-   
+.article-title-date {
+  /*border: 1px solid #F2E1C2;*/
+  text-align: center;
+  padding: 5px 25px;
+  /*    width: 80px;*/
 }
-.article-text-row{
-    text-align: justify;
-    padding: 5px;
+.article-text-row {
+  text-align: justify;
+  padding: 5px;
 }
-.article-text-text{
-    
+.article-text-row-caption {
+  margin: 3px auto;
+  text-align: center;
+  width: 80%;
+  color: #091140;
+  font-size: 1.6em;
 }
-.article-text-row-caption{
-    margin: 3px auto;
-    text-align: center;
-    width: 80%;
-    color: #091140;
-    font-size: 1.6em;
+.article-text-row img {
+  box-shadow: 3px 3px 5px 5px rgba(23, 52, 55, 0.3);
+  margin: 5px;
 }
-.article-text-row img{
-    box-shadow: 3px 3px 5px 5px rgba(23,52,55,0.3);
-    margin: 5px;
-}
-
 /* footer */
-.footer{
-    display: flex;
-    justify-content:space-between;
-    background: #091140;
-    color: #F2E1C2;
-    font-size: 10px;
-    padding: 0 15px;
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background: #091140;
+  color: #F2E1C2;
+  font-size: 10px;
+  padding: 0 15px;
 }
-
-.footer div{
-    /*border: 1px solid #000000;*/
-    /*width: 100%;*/
-    
+.footer div {
+  /*border: 1px solid #000000;*/
+  /*width: 100%;*/
 }
-
-.footer-center{
-    text-align: center;
-    width: 40%;
+.footer-center {
+  text-align: center;
+  width: 40%;
 }
-.footer-left{
-    width: 30%;
-    text-align: left;
+.footer-left {
+  width: 30%;
+  text-align: left;
 }
-
-.footer-right{
-    text-align: right;
-    width: 30%;
+.footer-right {
+  text-align: right;
+  width: 30%;
 }
-
+/*# sourceMappingURL=index.css.map */

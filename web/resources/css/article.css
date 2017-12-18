@@ -1,58 +1,50 @@
-.article-edit{
-    width:100%;
-    text-align: right;
+.article-edit {
+  width: 100%;
+  text-align: right;
 }
-.article-edit a{
-    
+.comment-author {
+  margin: 20px auto 0;
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
 }
-.comment-author{
-    margin: 20px auto 0;
-    width: 45%;
-    display: flex;
-    justify-content: space-between;
+.comment-text {
+  margin: 0 auto;
+  width: 45%;
+  height: 40px;
+  background: #F2E1C2;
+  color: #091140;
 }
-.comment-text{
-    margin: 0 auto;
-    width: 45%;
-    height: 40px;
-    background: #F2E1C2;
-    color: #091140;
+.comment-text textarea {
+  width: 100%;
+  height: 40px;
+  color: #091140;
+  background: #F2E1C2;
 }
-.comment-text textarea{
-    width: 100%;
-    height: 40px;
-    color: #091140;
-    background: #F2E1C2;
-
-    
+.comment-button-open {
+  margin: 0 auto;
+  width: 200px;
+  display: block;
 }
-
-.comment-button-open{
-    margin: 0 auto;
-    width: 200px;
-    display: block;
+.comment-button-open input {
+  background: #F2E1C2;
 }
-.comment-button-open input{
-    background: #F2E1C2;
+.comment-button-edit {
+  margin: 0 auto;
+  display: none;
+  width: 200px;
 }
-.comment-button-edit{
-    margin: 0 auto;
-    display: none;
-    width:200px;
-    
+.comment-button-edit input {
+  background: #F2E1C2;
 }
-.comment-button-edit input{
-    background: #F2E1C2;
+.comment-btn {
+  margin: 10px auto;
+  width: 200px;
+  text-align: center;
 }
-.comment-btn{
-    margin: 10px auto;
-    width: 200px;
-    text-align: center;
-}
-.comment-btn input{
-    width: 200px;
-    background: #F2E1C2;
-    
+.comment-btn input {
+  width: 200px;
+  background: #F2E1C2;
 }
 /*.comment-textarea:disabled{
     background: white;
@@ -61,5 +53,4 @@
 .edit-change-btn:disabled{
     background: white;
 }*/
-
-
+/*# sourceMappingURL=article.css.map */
