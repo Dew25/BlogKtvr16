@@ -6,7 +6,7 @@
             <li>${imageName}</li>
         </c:forEach>
     </ul>
-    <div class="content-right">
+    <div class="content-link">
         <a href="http://radikal.ru/" target="blank">Загрузить изображение для статьи (radikal.ru)</a><br>
         <br>
         <a href="http://da.am/" target="blank">Загрузить изображение для статьи (da.am)</a><br>

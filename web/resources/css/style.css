@@ -29,7 +29,7 @@ body {
 .article {
   margin: 35px auto;
   width: 83%;
-  box-shadow: 3px 2px 1px 0px #5e6695;
+  box-shadow: -13px 12px 1px 0px #5e6695;
   background: #F2E1C2;
   color: #091140;
   font-size: 1,5em;
@@ -81,7 +81,7 @@ body {
   font-size: 1.6em;
 }
 .article-text-row img {
-  box-shadow: 3px 2px 1px 0px #5e6695;
+  box-shadow: -13px 12px 1px 0px #5e6695;
   margin: 5px;
 }
 /* footer */
@@ -108,6 +108,39 @@ body {
 .footer-right {
   text-align: right;
   width: 30%;
+}
+.login {
+  margin: 15px auto;
+  width: 70%;
+  padding: 25px 0 50px;
+  box-shadow: 3px 3px 5px 2px #1b0333;
+  background: #F2E1C2;
+  color: #091140;
+}
+.login-tbl {
+  margin: 0 auto;
+  width: 300px;
+}
+.login-tbl-title {
+  text-align: right;
+  padding: 2px;
+}
+.login-tbl-input {
+  text-align: left;
+  padding: 2px;
+}
+.login-tbl-input input {
+  width: 140px;
+}
+.login-tbl-submit {
+  text-align: left;
+  padding: 4px 35px;
+}
+.login-tbl-submit input {
+  width: 110px;
+}
+.login-tbl-registration {
+  text-align: center;
 }
 .article-edit {
   width: 100%;
@@ -164,4 +197,84 @@ body {
 .edit-change-btn:disabled{
     background: white;
 }*/
-/*# sourceMappingURL=article.css.map */
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+.content-left {
+  width: 50%;
+  padding: 10px;
+  /*border: 1px solid #000000;*/
+  text-align: left;
+  background: #F2E1C2;
+  box-shadow: -13px 12px 1px 0px #5e6695;
+}
+.content-right {
+  width: 30%;
+  margin-left: 5px;
+  /*border: 1px solid #000000;*/
+  background: #F2E1C2;
+  box-shadow: -13px 12px 1px 0px #5e6695;
+}
+.content-link {
+  width: 80%;
+  padding: 10px 0;
+}
+.article-title input {
+  width: 100%;
+}
+.article-title {
+  width: 100%;
+}
+.article-caption {
+  color: #091140;
+}
+.article-caption input {
+  width: 100%;
+}
+.article-text {
+  width: 100%;
+  color: #091140;
+}
+.article-text textarea {
+  width: 100%;
+  height: 80px;
+}
+.article-submit {
+  padding: 10px;
+}
+.list-articles {
+  margin: 5px auto;
+  padding: 10px;
+  width: 80%;
+  background: #F2E1C2;
+  color: #091140;
+  box-shadow: -13px 12px 1px 0px #5e6695;
+}
+.table-articles {
+  width: 100%;
+  margin: 10px auto;
+  text-align: left;
+}
+.table-articles a {
+  color: #091140;
+}
+.table-articles-td-title {
+  width: 250px;
+}
+.table-articles-td-icons {
+  width: 50px;
+}
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+h3 {
+  width: 100%;
+  text-align: center;
+}
+.content {
+  display: flex;
+  justify-content: center;
+}
+/*# sourceMappingURL=style.css.map */

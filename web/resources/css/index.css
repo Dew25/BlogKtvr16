@@ -29,7 +29,7 @@ body {
 .article {
   margin: 35px auto;
   width: 83%;
-  box-shadow: 3px 3px 5px 2px #091140;
+  box-shadow: 3px 2px 1px 0px #5e6695;
   background: #F2E1C2;
   color: #091140;
   font-size: 1,5em;
@@ -81,7 +81,7 @@ body {
   font-size: 1.6em;
 }
 .article-text-row img {
-  box-shadow: 3px 3px 5px 5px rgba(23, 52, 55, 0.3);
+  box-shadow: 3px 2px 1px 0px #5e6695;
   margin: 5px;
 }
 /* footer */

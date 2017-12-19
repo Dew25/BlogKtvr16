@@ -1,8 +1,11 @@
+
 @color-menu: #091140;
 @color-article: #F2E1C2;
 @color-font: #F2E1C2;
 @color-title-article: #091140 + #333333;
 @color-title-article2: #3947A0;
+@box-shadow-var: 3px 2px 1px 0px #091140 + #555555;
+
 body{
     background: #730D0D;
     color: @color-article;
@@ -38,7 +41,7 @@ body{
 .article{
     margin: 35px auto;
     width: 83%;
-    box-shadow: 3px 3px 5px 2px #091140;
+    box-shadow: @box-shadow-var;
     background: @color-article;
     color: @color-menu; 
     font-size: 1,5em;
@@ -99,7 +102,7 @@ body{
     font-size: 1.6em;
 }
 .article-text-row img{
-    box-shadow: 3px 3px 5px 5px rgba(23,52,55,0.3);
+    box-shadow: @box-shadow-var;
     margin: 5px;
 }
 
